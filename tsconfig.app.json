@@ -22,16 +22,7 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-
-    /* Aliases */
-    "baseUrl": "./",
-    "paths": {
-      "@app/*": ["./src/app/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@shared/*": ["./src/shared/*"]
-    }
+    "noUncheckedSideEffectImports": true
   },
   "include": ["src"]
 }
