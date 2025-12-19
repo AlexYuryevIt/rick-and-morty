@@ -1,7 +1,7 @@
+import { RouterProvider } from 'react-router';
 import './App.css';
+import { router } from './router';
 
-function App() {
-  return <h1>Vite + React</h1>;
-}
-
-export default App;
+export const App = () => {
+  return <RouterProvider router={router} />;
+};
