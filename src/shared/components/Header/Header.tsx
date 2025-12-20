@@ -11,7 +11,9 @@ export const AppHeader = () => {
   const [theme, setTheme] = useState<TTheme>(ColorScheme.Light);
 
   const handleChangeLanguage = () => {
-    setLang((prev) => (prev === 'ru' ? 'en' : 'ru'));
+    setLang((prev) =>
+      prev === ThemeLanguage.Ru ? ThemeLanguage.En : ThemeLanguage.Ru
+    );
   };
 
   const handleChangeTheme = () => {

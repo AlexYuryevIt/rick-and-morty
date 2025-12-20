@@ -12,22 +12,4 @@ if (rootElement) {
       <App />
     </StrictMode>
   );
-} else {
-  const fallbackRoot = createRoot(document.body);
-  fallbackRoot.render(
-    <StrictMode>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          fontSize: '1.5rem',
-          color: 'red'
-        }}
-      >
-        Error: Root element not found
-      </div>
-    </StrictMode>
-  );
 }

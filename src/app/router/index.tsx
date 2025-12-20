@@ -1,7 +1,6 @@
 import { MainLayout } from '@layouts';
 import { HomePage } from '@pages';
 import { createBrowserRouter } from 'react-router';
-import { paths } from './paths';
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +11,7 @@ export const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: paths.characterPage,
+        path: '/character/:id',
         element: <div>character page</div>
       }
     ]
