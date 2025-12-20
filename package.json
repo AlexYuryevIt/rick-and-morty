@@ -8,8 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prettify": "prettier src --write",
-    "svg": "npx @svgr/cli --out-dir src/assets/icons/components --ignore-existing --typescript -- src/assets/icons/origin "
+    "prettify": "prettier src --write"
   },
   "dependencies": {
     "react": "^19.2.0",
