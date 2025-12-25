@@ -29,7 +29,7 @@ export default defineConfig([
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
-          project: './tsconfig.json'
+          project: './tsconfig.app.json'
         }
       },
       'import/parsers': {
