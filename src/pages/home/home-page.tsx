@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import { banner } from '@assets';
 import { Loader } from '@components';
-import { useState } from 'react';
 
 export const HomePage = () => {
   const [isLoading, _setIsLoading] = useState(true);
