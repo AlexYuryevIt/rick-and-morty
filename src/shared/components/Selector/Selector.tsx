@@ -1,43 +1,12 @@
-import { useEffect, useRef, useState, type ComponentType } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { ArrowDown, ArrowUp, Checkmark, Close } from '@assets';
 
 import { IconButton } from '../IconButton/IconButton';
 
-type TOption<T> = {
-  label: string;
-  value: T;
-};
+import { selectorSizes } from './SelectorStyles';
 
-type TDefaultOptionComponentProps<T> = {
-  option: TOption<T>;
-  selected?: boolean;
-};
-
-type TSelectorProps<T> = {
-  options: TOption<T>[];
-  value: T | null;
-  size?: 'sm' | 'xl';
-  placeholder?: string;
-  hasClearButton?: boolean;
-  clearButtonSize?: 'sm' | 'md';
-  clearButtonVariant?: 'plain' | 'bordered';
-  onSelect: (value: T | null) => void;
-  OptionComponent?: ComponentType<TDefaultOptionComponentProps<T>>;
-};
-
-const selectorSizes = {
-  sm: {
-    button: 'w-23.5 h-5.25 py-0.5 px-1 text-sm',
-    menu: 'w-23.5 top-6',
-    option: 'w-23.5 py-0.5 px-1 text-sm'
-  },
-  xl: {
-    button: 'w-60 h-15 py-4 px-2 ',
-    menu: 'w-60 top-17',
-    option: 'h-10 py-4 px-2'
-  }
-} as const;
+import type { TDefaultOptionComponentProps, TSelectorProps } from './types';
 
 export const DefaultOptionComponent = <T,>({
   option,
@@ -100,7 +69,7 @@ export const Selector = <T,>({
 
   return (
     <div
-      className='relative flex gap-2.5 align-middle'
+      className='relative flex gap-2.5 items-center'
       ref={selectRef}
     >
       <button
