@@ -36,6 +36,7 @@ export const HomePage = () => {
             value={status}
             onSelect={setStatus}
             hasClearButton={true}
+            clearButtonSize='small'
             OptionComponent={({ option }) => (
               <div className='flex gap-1 items-center'>
                 <p>{option.label}</p>

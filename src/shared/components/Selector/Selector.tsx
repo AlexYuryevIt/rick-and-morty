@@ -92,6 +92,7 @@ export const Selector = <T,>({
           onClick={handleClearSelection}
           variant={clearButtonVariant}
           size={clearButtonSize}
+          className='absolute top-2 right-2'
         >
           <Close />
         </IconButton>
