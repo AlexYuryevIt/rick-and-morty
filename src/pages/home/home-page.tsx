@@ -6,8 +6,10 @@ import { selectorOptions } from '@constants';
 
 export const HomePage = () => {
   const [isLoading, _setIsLoading] = useState(false);
-  const [species, setSpecies] = useState('');
-  const [status, setStatus] = useState(selectorOptions.status[0]);
+  const [species, setSpecies] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
+
+  const handleSetSpecies = (value: string | null) => setSpecies(value);
 
   return (
     <div className='flex flex-col justify-center items-center'>
@@ -21,20 +23,23 @@ export const HomePage = () => {
           <Selector
             options={selectorOptions.species}
             placeholder='Species'
-            size='big'
+            size='xl'
             value={species}
-            onSelect={setSpecies}
+            onSelect={handleSetSpecies}
+            hasClearButton={true}
           />
           <Selector
             options={selectorOptions.status}
-            size='small'
+            size='sm'
             value={status}
             onSelect={setStatus}
-            renderStatusIcon={(option) => {
-              if (option === 'Alive') return <StatusDot color={'green'} />;
-              if (option === 'Dead') return <StatusDot color={'red'} />;
-              if (option === 'Unknown') return <StatusDot color='orange' />;
-            }}
+            hasClearButton={true}
+            OptionComponent={({ option }) => (
+              <div className='flex gap-1 items-center'>
+                <p>{option.label}</p>
+                <StatusDot color={option.value} />
+              </div>
+            )}
           />
         </div>
       )}

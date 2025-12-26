@@ -1,5 +1,5 @@
 type TStatusDotProps = {
-  color: 'green' | 'red' | 'orange';
+  color: string;
 };
 
 export const StatusDot = ({ color }: TStatusDotProps) => (

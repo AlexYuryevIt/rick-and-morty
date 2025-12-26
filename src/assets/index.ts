@@ -1,5 +1,7 @@
 export { default as ArrowDown } from './icons/arrow-down.svg?react';
 export { default as ArrowUp } from './icons/arrow-up.svg?react';
+export { default as Checkmark } from './icons/checkmark.svg?react';
+export { default as Close } from './icons/cross.svg?react';
 export { default as HeaderLogo } from './icons/header-logo.svg?react';
 export { default as LoaderBig } from './icons/loader-big.svg?react';
 export { default as LoaderSmall } from './icons/loader-small.svg?react';

@@ -56,13 +56,20 @@ export default defineConfig([
           'newlines-between': 'always'
         }
       ],
-      'no-unused-vars': 'warn',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react-refresh/only-export-components': 'warn',
       'prefer-const': 'warn',
       'import/no-unresolved': ['error'],
-      'import/no-duplicates': ['error']
+      'import/no-duplicates': ['error'],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_'
+        }
+      ]
     }
   }
 ]);
