@@ -1,14 +1,16 @@
+import type { Status } from '@types';
+
 type TStatusDotProps = {
-  color: string;
+  status: Status;
 };
 
-export const StatusDot = ({ color }: TStatusDotProps) => (
+export const StatusDot = ({ status }: TStatusDotProps) => (
   <span
     className={`
       inline-block h-2.5 w-2.5 rounded-full
-      ${color === 'green' ? 'bg-green-500' : ''}
-      ${color === 'red' ? 'bg-red-500' : ''}
-      ${color === 'orange' ? 'bg-orange-400' : ''}
+      ${status === 'alive' ? 'bg-green-500' : ''}
+      ${status === 'dead' ? 'bg-red-500' : ''}
+      ${status === 'unknown' ? 'bg-orange-400' : ''}
     `}
   />
 );

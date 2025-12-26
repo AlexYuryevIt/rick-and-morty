@@ -13,10 +13,10 @@ export type TDefaultOptionComponentProps<T> = {
 export type TSelectorProps<T> = {
   options: TOption<T>[];
   value: T | null;
-  size?: 'sm' | 'xl';
+  size?: 'small' | 'big';
   placeholder?: string;
   hasClearButton?: boolean;
-  clearButtonSize?: 'sm' | 'md';
+  clearButtonSize?: 'small' | 'medium';
   clearButtonVariant?: 'plain' | 'bordered';
   onSelect: (value: T | null) => void;
   OptionComponent?: ComponentType<TDefaultOptionComponentProps<T>>;

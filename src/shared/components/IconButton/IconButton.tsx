@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 type TIconButtonProps = {
   children: ReactNode | 'string';
-  size?: 'sm' | 'md';
+  size?: 'small' | 'medium';
   variant?: 'plain' | 'bordered';
   className?: string;
   onClick: () => void;
@@ -14,13 +14,13 @@ const defaultButtonStyles = {
 };
 
 const defaultButtonSizes = {
-  sm: 'w-2 h-2',
-  md: 'w-9.5 h-9.5'
+  small: 'w-2 h-2',
+  medium: 'w-9.5 h-9.5'
 };
 
 export const IconButton = ({
   children,
-  size = 'md',
+  size = 'medium',
   variant = 'bordered',
   className,
   onClick

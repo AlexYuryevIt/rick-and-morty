@@ -22,10 +22,10 @@ export const DefaultOptionComponent = <T,>({
 
 export const Selector = <T,>({
   options,
-  size = 'xl',
+  size = 'big',
   placeholder = '',
   hasClearButton = false,
-  clearButtonSize = 'sm',
+  clearButtonSize = 'small',
   clearButtonVariant = 'plain',
   value,
   onSelect,
@@ -82,9 +82,9 @@ export const Selector = <T,>({
           <p>{placeholder}</p>
         )}
         {isOpen ? (
-          <ArrowUp width={size === 'xl' ? '10px' : '4px'} />
+          <ArrowUp width={size === 'big' ? '10px' : '4px'} />
         ) : (
-          <ArrowDown width={size === 'xl' ? '10px' : '4px'} />
+          <ArrowDown width={size === 'big' ? '10px' : '4px'} />
         )}
       </button>
       {hasClearButton && selectedOption && (
