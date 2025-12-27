@@ -1,5 +1,6 @@
-import { AppHeader, Footer } from '@components';
 import { Outlet } from 'react-router';
+
+import { AppHeader, Footer } from '@components';
 
 export const MainLayout = () => {
   return (

@@ -2,13 +2,35 @@ import type { ReactNode } from 'react';
 
 type TIconButtonProps = {
   children: ReactNode | 'string';
+  size?: 'small' | 'medium';
+  variant?: 'plain' | 'bordered';
+  className?: string;
   onClick: () => void;
 };
 
-export const IconButton = ({ children, onClick }: TIconButtonProps) => {
+const defaultButtonStyles = {
+  plain: 'flex justify-center items-center cursor-pointer',
+  bordered: 'flex justify-center items-center border rounded-lg cursor-pointer'
+};
+
+const defaultButtonSizes = {
+  small: 'w-2 h-2',
+  medium: 'w-9.5 h-9.5'
+};
+
+export const IconButton = ({
+  children,
+  size = 'medium',
+  variant = 'bordered',
+  className,
+  onClick
+}: TIconButtonProps) => {
+  const styles = defaultButtonStyles[variant];
+  const buttonSize = defaultButtonSizes[size];
+
   return (
     <button
-      className='flex justify-center items-center border rounded-lg w-9.5 h-9.5 cursor-pointer'
+      className={`${styles} ${buttonSize} ${className}`}
       onClick={onClick}
     >
       {children}

@@ -1,6 +1,8 @@
+import { useState } from 'react';
+
 import { HeaderLogo, Moon, Sun } from '@assets';
 import { ColorScheme, LABELS, ThemeLanguage } from '@constants';
-import { useState } from 'react';
+
 import { IconButton } from '../IconButton/IconButton';
 
 type TLang = (typeof ThemeLanguage)[keyof typeof ThemeLanguage];
