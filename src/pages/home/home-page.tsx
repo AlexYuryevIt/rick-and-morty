@@ -6,17 +6,17 @@ import { CharacterCard } from '@widgets';
 
 import type { Status } from '@types';
 
+const character = {
+  name: 'Rick Sanchez',
+  gender: 'Male',
+  species: 'Human',
+  location: 'Earth',
+  status: 'alive' as Status,
+  photo: Rick
+};
+
 export const HomePage = () => {
   const [isLoading, _setIsLoading] = useState(false);
-
-  const character = {
-    name: 'Rick Sanchez',
-    gender: 'Male',
-    species: 'Human',
-    location: 'Earth',
-    status: 'alive' as Status,
-    photo: Rick
-  };
 
   return (
     <div className='flex flex-col justify-center items-center'>
