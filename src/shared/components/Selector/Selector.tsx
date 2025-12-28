@@ -26,7 +26,7 @@ export const Selector = <T,>({
   size = 'big',
   placeholder = '',
   hasClearButton = false,
-  clearButtonSize = 'small',
+  clearButtonSize = 'auto',
   clearButtonVariant = 'plain',
   value,
   onSelect,
@@ -105,7 +105,7 @@ export const Selector = <T,>({
         <ul
           className={classNames(
             selectorSizes[size].menu,
-            'absolute left-0 flex flex-col justify-center bg-white border border-[#393939] rounded-md z-[1000]'
+            'absolute left-0 flex flex-col justify-center bg-white border border-[#393939] rounded-md z-1000'
           )}
         >
           {options.map((option) => {
