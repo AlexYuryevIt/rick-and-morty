@@ -1,23 +1,12 @@
-import { useId, type ChangeEvent, type ReactNode } from 'react';
+import { useId } from 'react';
 
 import { Close } from '@assets';
+import { IconButton } from '@components';
+import { classNames } from '@helpers';
 
-import { IconButton } from '../IconButton/IconButton';
+import { inputSizes } from './InputStyles';
 
-type TInputProps = {
-  value: string;
-  placeholder?: string;
-  size?: 'small' | 'big';
-  icon?: ReactNode;
-  styles?: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClear?: (value: string) => void;
-};
-
-const inputSizes = {
-  small: 'h-7.5 w-45 border-b px-0 text-xl',
-  big: 'h-14 w-60 border rounded-md p-4'
-};
+import type { TInputProps } from './types';
 
 export const Input = ({
   value,
@@ -32,19 +21,23 @@ export const Input = ({
     onClear?.('');
   };
 
-  const isBigSize = size === 'big';
-
   return (
     <div className='relative'>
       <input
         value={value}
         placeholder={placeholder}
-        className={`${inputSizes[size]} ${icon && 'pl-10'} ${value && isBigSize && 'pr-10'} outline-0 placeholder:text-gray-500 ${styles ?? ''}`}
+        className={classNames(
+          inputSizes[size],
+          icon && 'pl-10',
+          value && onClear && 'pr-10',
+          'outline-0 placeholder:text-gray-500',
+          styles
+        )}
         onChange={onChange}
         type='text'
         id={useId()}
       />
-      {value && isBigSize && (
+      {value && onClear && (
         <IconButton
           variant='plain'
           size='small'
