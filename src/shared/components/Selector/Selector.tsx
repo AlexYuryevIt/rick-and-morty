@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { ArrowDown, ArrowUp, Checkmark, Close } from '@assets';
+import { classNames } from '@helpers';
 
 import { IconButton } from '../IconButton/IconButton';
 
@@ -34,7 +35,6 @@ export const Selector = <T,>({
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
   const selectedOption = options.find((option) => option.value === value);
-  const selectorStyles = selectorSizes[size];
 
   const handleMenuToggle = () => setIsOpen((prev) => !prev);
 
@@ -73,8 +73,11 @@ export const Selector = <T,>({
       ref={selectRef}
     >
       <button
-        className={`${selectorStyles.button} border border-[#393939] rounded-md text-black/60 text-left flex items-center justify-between `}
         onClick={handleMenuToggle}
+        className={classNames(
+          selectorSizes[size].button,
+          'border border-[#393939] rounded-md text-black/60 text-left flex items-center justify-between'
+        )}
       >
         {selectedOption ? (
           <OptionComponent option={selectedOption} />
@@ -87,6 +90,7 @@ export const Selector = <T,>({
           <ArrowDown width={size === 'big' ? '10px' : '4px'} />
         )}
       </button>
+
       {hasClearButton && selectedOption && (
         <IconButton
           onClick={handleClearSelection}
@@ -99,7 +103,10 @@ export const Selector = <T,>({
       )}
       {isOpen && (
         <ul
-          className={`${selectorStyles.menu} absolute left-0 flex flex-col justify-center bg-white border border-[#393939] rounded-md z-1000`}
+          className={classNames(
+            selectorSizes[size].menu,
+            'absolute left-0 flex flex-col justify-center bg-white border border-[#393939] rounded-md z-[1000]'
+          )}
         >
           {options.map((option) => {
             const isSelected = option.value === value;
@@ -108,7 +115,10 @@ export const Selector = <T,>({
               <li
                 key={String(option.value)}
                 onClick={() => handleSelect(option.value)}
-                className={`${selectorStyles.option} flex items-center gap-1 text-left cursor-default text-black/60 hover:text-black`}
+                className={classNames(
+                  selectorSizes[size].option,
+                  'flex items-center gap-1 text-left cursor-default text-black/60 hover:text-black'
+                )}
               >
                 <OptionComponent
                   option={option}
