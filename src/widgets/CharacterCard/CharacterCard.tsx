@@ -42,7 +42,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
     <div className='flex gap-3 p-1.5 rounded-md shadow w-127 max-h-62 items-start group'>
       <img
         src={character.photo}
-        className='w-60 rounded-md'
+        className='w-60 h-58.5 rounded-md'
       />
 
       <div className='w-full flex flex-col gap-2'>
