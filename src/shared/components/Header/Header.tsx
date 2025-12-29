@@ -32,8 +32,16 @@ export const AppHeader = () => {
       <div className='max-w-7xl mx-auto px-4 flex items-center justify-between h-full'>
         <HeaderLogo />
         <div className='flex gap-4'>
-          <IconButton onClick={handleChangeTheme}>{currentTheme}</IconButton>
-          <IconButton onClick={handleChangeLanguage}>
+          <IconButton
+            onClick={handleChangeTheme}
+            size='big'
+          >
+            {currentTheme}
+          </IconButton>
+          <IconButton
+            onClick={handleChangeLanguage}
+            size='big'
+          >
             <p className='text-2xl text-gray-500'>{currentLanguage}</p>
           </IconButton>
         </div>

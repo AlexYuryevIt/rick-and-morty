@@ -16,7 +16,7 @@ export type TSelectorProps<T> = {
   size?: 'small' | 'big';
   placeholder?: string;
   hasClearButton?: boolean;
-  clearButtonSize?: 'small' | 'medium';
+  clearButtonSize?: 'small' | 'big' | 'auto';
   clearButtonVariant?: 'plain' | 'bordered';
   onSelect: (value: T | null) => void;
   OptionComponent?: ComponentType<TDefaultOptionComponentProps<T>>;
