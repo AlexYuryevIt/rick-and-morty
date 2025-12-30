@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { banner, Rick } from '@assets';
 import { Loader } from '@components';
-import { CharacterCard } from '@widgets';
+import { CharacterCard, CharacterFilters } from '@widgets';
 
 import type { Status } from '@types';
 
@@ -26,7 +26,8 @@ export const HomePage = () => {
           <Loader />
         </div>
       ) : (
-        <div className='flex gap-2.5 items-start'>
+        <div className='flex flex-col gap-7 items-start'>
+          <CharacterFilters />
           <CharacterCard character={character} />
         </div>
       )}
