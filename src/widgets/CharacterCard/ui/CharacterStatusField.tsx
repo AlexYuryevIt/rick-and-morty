@@ -17,32 +17,30 @@ export const CharacterStatusField = ({
   characterStatus,
   isEditing,
   onSelect
-}: TCharacterStatusFieldProps) => {
-  return (
-    <div>
-      <p>{label}</p>
-      {isEditing ? (
-        <Selector
-          options={statusOptions}
-          size='small'
-          value={characterStatus}
-          onSelect={onSelect}
-          clearButtonSize='small'
-          OptionComponent={({ option }) => (
-            <div className='flex gap-1 items-center'>
-              <p>{option.label}</p>
-              <StatusDot status={option.value} />
-            </div>
-          )}
-        />
-      ) : (
-        <div className='flex items-center gap-1'>
-          <p className='text-black/60 text-sm'>
-            {getCharacterStatus(characterStatus)}
-          </p>
-          <StatusDot status={characterStatus} />
-        </div>
-      )}
-    </div>
-  );
-};
+}: TCharacterStatusFieldProps) => (
+  <div>
+    <p>{label}</p>
+    {isEditing ? (
+      <Selector
+        options={statusOptions}
+        size='small'
+        value={characterStatus?.toLowerCase() as Status}
+        onSelect={onSelect}
+        clearButtonSize='small'
+        OptionComponent={({ option }) => (
+          <div className='flex gap-1 items-center'>
+            <p>{option.label}</p>
+            <StatusDot status={option.value} />
+          </div>
+        )}
+      />
+    ) : (
+      <div className='flex items-center gap-1'>
+        <p className='text-black/60 text-sm'>
+          {getCharacterStatus(characterStatus)}
+        </p>
+        <StatusDot status={characterStatus} />
+      </div>
+    )}
+  </div>
+);
