@@ -5,8 +5,8 @@ import { IconButton } from '@components';
 import { type Status, type TCharacter } from '@types';
 
 import { CharacterField } from './ui/CharacterField';
+import { CharacterNameField } from './ui/CharacterNameField';
 import { CharacterStatusField } from './ui/CharacterStatusField';
-import { CharacterNameField } from './ui/CharcterNameField';
 
 export type TCharacterCardProps = {
   character: TCharacter;
@@ -39,9 +39,9 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
   const handleConfirmEdit = () => setIsEditing(false);
 
   return (
-    <div className='flex gap-3 p-1.5 rounded-md shadow w-127 max-h-62 items-start group'>
+    <div className='relative flex gap-3 p-1.5 rounded-md shadow w-127 max-h-62 items-start group'>
       <img
-        src={character.photo}
+        src={character.image}
         className='w-60 h-58.5 rounded-md'
       />
 
@@ -54,8 +54,10 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
         />
 
         <CharacterField label='Gender'>{character.gender}</CharacterField>
-        <CharacterField label='Species'>{character.location}</CharacterField>
-        <CharacterField label='Location'>{character.species}</CharacterField>
+        <CharacterField label='Species'>{character.species}</CharacterField>
+        <CharacterField label='Location'>
+          {character.location.name}
+        </CharacterField>
 
         <CharacterStatusField
           label='Status'
@@ -71,14 +73,14 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
         <IconButton
           onClick={handleEditCard}
           variant='plain'
-          className='opacity-0 group-hover:opacity-100 transition-all duration-100'
+          className='absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-100'
         >
           <Edit />
         </IconButton>
       )}
 
       {isEditing && (
-        <div className='flex items-center'>
+        <div className='absolute top-2 right-2 flex items-center'>
           <IconButton
             variant='plain'
             onClick={handleCancelEdit}

@@ -1,34 +1,42 @@
-import { useState } from 'react';
-
-import { banner, Rick } from '@assets';
-import { Loader } from '@components';
+import { banner } from '@assets';
+import { ErrorMessage, Loader } from '@components';
+import { UNEXPECTED_ERROR } from '@constants';
+import { useGetCharacters } from '@hooks';
 import { CharacterCard, CharacterFilters } from '@widgets';
 
-import type { Status } from '@types';
-
-const character = {
-  name: 'Rick Sanchez',
-  gender: 'Male',
-  species: 'Human',
-  location: 'Earth',
-  status: 'alive' as Status,
-  photo: Rick
-};
-
 export const HomePage = () => {
-  const [isLoading, _setIsLoading] = useState(false);
+  const { characters, isLoading, isError, refetch } = useGetCharacters();
 
   return (
     <div className='flex flex-col justify-center items-center'>
       <img src={banner} />
-      {isLoading ? (
+
+      {isError && (
+        <ErrorMessage
+          message={UNEXPECTED_ERROR}
+          refetch={refetch}
+        />
+      )}
+
+      {isLoading && (
         <div>
           <Loader />
         </div>
-      ) : (
+      )}
+
+      {characters.length > 0 && (
         <div className='flex flex-col gap-7 items-start'>
           <CharacterFilters />
-          <CharacterCard character={character} />
+
+          <div className='flex flex-wrap gap-7'>
+            {characters &&
+              characters.map((char) => (
+                <CharacterCard
+                  character={char}
+                  key={char.id}
+                />
+              ))}
+          </div>
         </div>
       )}
     </div>

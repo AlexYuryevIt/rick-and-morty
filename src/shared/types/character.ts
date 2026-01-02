@@ -1,10 +1,21 @@
 import type { Status } from '@types';
 
-export type TCharacter = {
+type TLocation = {
   name: string;
-  gender: string;
-  species: string;
-  location: string;
+  url: string;
+};
+
+export type TCharacter = {
+  id: string;
+  name: string;
   status: Status;
-  photo?: string;
+  species: string;
+  type: string;
+  gender: string;
+  origin: TLocation;
+  location: TLocation;
+  image?: string;
+  episode: string[];
+  url: string;
+  created: string;
 };

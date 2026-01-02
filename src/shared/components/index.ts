@@ -1,3 +1,4 @@
+export * from './ErrorMessage/ErrorMessage';
 export * from './Footer/Footer';
 export * from './Header/Header';
 export * from './IconButton/IconButton';
