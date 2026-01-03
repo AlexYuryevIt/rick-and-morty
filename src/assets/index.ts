@@ -1,4 +1,5 @@
 export { default as ArrowDown } from './icons/arrow-down.svg?react';
+export { default as ArrowLeft } from './icons/arrow-left.svg?react';
 export { default as ArrowUp } from './icons/arrow-up.svg?react';
 export { default as Checkmark } from './icons/checkmark.svg?react';
 export { default as Close } from './icons/cross.svg?react';

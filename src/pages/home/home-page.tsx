@@ -29,7 +29,8 @@ export const HomePage = () => {
     errorMessage,
     hasNext,
     loadMore,
-    refetch
+    refetch,
+    updateCharacter
   } = useGetCharacters(debouncedFilters);
 
   return (
@@ -60,22 +61,21 @@ export const HomePage = () => {
       )}
 
       <div className='flex flex-col gap-7 items-center'>
-        {characters.length > 0 && (
-          <InfiniteScroll
-            hasNext={hasNext}
-            isLoading={isLoading}
-            loadMore={loadMore}
-          >
-            <div className='flex flex-wrap gap-7 items-center justify-center'>
-              {characters.map((char) => (
-                <CharacterCard
-                  character={char}
-                  key={char.id}
-                />
-              ))}
-            </div>
-          </InfiniteScroll>
-        )}
+        <InfiniteScroll
+          hasNext={hasNext}
+          isLoading={isLoading}
+          loadMore={loadMore}
+        >
+          <div className='flex flex-wrap gap-7 items-center justify-center'>
+            {characters.map((char) => (
+              <CharacterCard
+                character={char}
+                key={char.id}
+                onSave={updateCharacter}
+              />
+            ))}
+          </div>
+        </InfiniteScroll>
       </div>
     </div>
   );

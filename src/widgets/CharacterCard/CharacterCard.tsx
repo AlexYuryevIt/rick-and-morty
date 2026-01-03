@@ -1,18 +1,20 @@
 import { useState, type ChangeEvent } from 'react';
 
 import { Checkmark, Close, Edit } from '@assets';
-import { IconButton } from '@components';
+import {
+  CharacterField,
+  CharacterNameField,
+  CharacterStatusField,
+  IconButton
+} from '@components';
 import { type Status, type TCharacter } from '@types';
-
-import { CharacterField } from './ui/CharacterField';
-import { CharacterNameField } from './ui/CharacterNameField';
-import { CharacterStatusField } from './ui/CharacterStatusField';
 
 export type TCharacterCardProps = {
   character: TCharacter;
+  onSave: (character: TCharacter) => void;
 };
 
-export const CharacterCard = ({ character }: TCharacterCardProps) => {
+export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedCharacter, setEditedCharacter] = useState<TCharacter>(character);
 
@@ -36,7 +38,11 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
     setEditedCharacter(character);
     setIsEditing(false);
   };
-  const handleConfirmEdit = () => setIsEditing(false);
+
+  const handleConfirmEdit = () => {
+    onSave(editedCharacter);
+    setIsEditing(false);
+  };
 
   return (
     <div className='relative flex gap-3 p-1.5 rounded-md shadow w-127 max-h-62 items-start group'>
@@ -48,6 +54,7 @@ export const CharacterCard = ({ character }: TCharacterCardProps) => {
       <div className='w-full flex flex-col gap-2'>
         <CharacterNameField
           name={isEditing ? editedCharacter.name : character.name}
+          characterLink={`/character/${character.id}`}
           isEditing={isEditing}
           onChange={handleEditName}
           onClear={handleClearName}
