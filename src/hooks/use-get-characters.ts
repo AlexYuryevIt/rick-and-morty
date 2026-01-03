@@ -97,6 +97,8 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
         char.id === updatedCharacter.id ? updatedCharacter : char
       )
     );
+
+    notify('Данные персонажа обновлены', 'success');
   };
 
   return {
