@@ -2,8 +2,8 @@ import { isAxiosError } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { getCharacters } from '@api';
-import { initialPage, UNEXPECTED_ERROR } from '@constants';
-import { getErrorMessage, notify } from '@helpers';
+import { ERROR_MESSAGES, initialPage, UNEXPECTED_ERROR } from '@constants';
+import { notify } from '@helpers';
 import { type TCharacter, type TFilters } from '@types';
 
 type TUseGetCharactersProps = {
@@ -14,7 +14,6 @@ type TUseGetCharactersProps = {
   hasNext: boolean;
   loadMore: () => void;
   refetch: () => void;
-  updateCharacter: (character: TCharacter) => void;
 };
 
 export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
@@ -62,7 +61,8 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
         setCharacters([]);
 
         if (isAxiosError(error)) {
-          const message = getErrorMessage(error);
+          const errorStatus = error?.response?.status || error?.status || 0;
+          const message = ERROR_MESSAGES[errorStatus] || UNEXPECTED_ERROR;
           setErrorMessage(message);
           notify(message, 'error');
         }
@@ -91,14 +91,6 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
     getCharactersList(initialPage);
   }, [getCharactersList]);
 
-  const updateCharacter = (updatedCharacter: TCharacter) => {
-    setCharacters((prev) =>
-      prev.map((char) =>
-        char.id === updatedCharacter.id ? updatedCharacter : char
-      )
-    );
-  };
-
   return {
     characters,
     isLoading,
@@ -106,7 +98,6 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
     errorMessage,
     hasNext,
     loadMore,
-    refetch,
-    updateCharacter
+    refetch
   };
 };
