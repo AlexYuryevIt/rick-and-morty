@@ -1,6 +1,6 @@
-export type TFilters = {
-  name: string;
-  species: string | null;
-  gender: string | null;
-  status: string | null;
+import type { TFilters } from '@types';
+
+export type TFiltersProps = {
+  filters: TFilters;
+  setFilters: React.Dispatch<React.SetStateAction<TFilters>>;
 };

@@ -1,11 +1,26 @@
 import axios from 'axios';
 
 import { BASE_URL, ENDPOINTS } from '../paths';
+import { getParams } from '../utils/get-params';
 
-export const getCharacters = async () => {
+import type { TFilters } from '@types';
+
+export const getCharacters = async (
+  filters: TFilters,
+  page: number,
+  signal?: AbortSignal
+) => {
   const URL = `${BASE_URL}${ENDPOINTS.characters}`;
 
-  const characters = await axios.get(URL);
+  const params: Record<string, string> = getParams(filters);
 
-  return characters.data.results;
+  const { data } = await axios.get(URL, {
+    params: { ...params, page },
+    signal
+  });
+
+  return {
+    characters: data.results,
+    hasNext: Boolean(data.info.next)
+  };
 };

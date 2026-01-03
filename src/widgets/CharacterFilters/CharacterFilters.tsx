@@ -1,24 +1,18 @@
-import { useCallback, useState, type ChangeEvent } from 'react';
+import { useCallback, type ChangeEvent } from 'react';
 
 import { Search } from '@assets';
 import { Input, Selector } from '@components';
 import { genderOptions, speciesOptions, statusOptions } from '@constants';
+import { type TFilters } from '@types';
 
-import type { TFilters } from './types';
+import type { TFiltersProps } from './types';
 
-export const CharacterFilters = () => {
-  const [filters, setFilters] = useState({
-    name: '',
-    species: null,
-    gender: null,
-    status: null
-  });
-
+export const CharacterFilters = ({ filters, setFilters }: TFiltersProps) => {
   const handleSetFilter = useCallback(
     (value: string | null, field: keyof TFilters) => {
       setFilters((prev) => ({ ...prev, [field]: value }));
     },
-    []
+    [setFilters]
   );
 
   const handleSetName = (e: ChangeEvent<HTMLInputElement>) => {

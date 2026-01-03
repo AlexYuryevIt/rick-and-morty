@@ -1,20 +1,55 @@
+import { useState } from 'react';
+
 import { banner } from '@assets';
-import { ErrorMessage, Loader } from '@components';
+import { ErrorMessage, InfiniteScroll, Loader } from '@components';
 import { UNEXPECTED_ERROR } from '@constants';
-import { useGetCharacters } from '@hooks';
+import { useDebounce, useGetCharacters } from '@hooks';
 import { CharacterCard, CharacterFilters } from '@widgets';
 
+import type { TFilters } from '@types';
+
+const initialFiltersState = {
+  name: '',
+  species: null,
+  gender: null,
+  status: null
+};
+
 export const HomePage = () => {
-  const { characters, isLoading, isError, refetch } = useGetCharacters();
+  const [filters, setFilters] = useState<TFilters>(initialFiltersState);
+
+  const debouncedFilters = useDebounce(filters);
+
+  const handleGoBack = () => setFilters(initialFiltersState);
+
+  const {
+    characters,
+    isLoading,
+    isError,
+    errorMessage,
+    hasNext,
+    loadMore,
+    refetch
+  } = useGetCharacters(debouncedFilters);
 
   return (
-    <div className='flex flex-col justify-center items-center'>
-      <img src={banner} />
+    <div className='flex flex-col justify-center items-center gap-4'>
+      <img
+        src={banner}
+        width={600}
+        height={200}
+      />
+
+      <CharacterFilters
+        filters={filters}
+        setFilters={setFilters}
+      />
 
       {isError && (
         <ErrorMessage
-          message={UNEXPECTED_ERROR}
+          message={errorMessage ?? UNEXPECTED_ERROR}
           refetch={refetch}
+          onGoBack={handleGoBack}
         />
       )}
 
@@ -24,21 +59,24 @@ export const HomePage = () => {
         </div>
       )}
 
-      {characters.length > 0 && (
-        <div className='flex flex-col gap-7 items-start'>
-          <CharacterFilters />
-
-          <div className='flex flex-wrap gap-7'>
-            {characters &&
-              characters.map((char) => (
+      <div className='flex flex-col gap-7 items-center'>
+        {characters.length > 0 && (
+          <InfiniteScroll
+            hasNext={hasNext}
+            isLoading={isLoading}
+            loadMore={loadMore}
+          >
+            <div className='flex flex-wrap gap-7 items-center justify-center'>
+              {characters.map((char) => (
                 <CharacterCard
                   character={char}
                   key={char.id}
                 />
               ))}
-          </div>
-        </div>
-      )}
+            </div>
+          </InfiniteScroll>
+        )}
+      </div>
     </div>
   );
 };
