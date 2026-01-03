@@ -1,9 +1,12 @@
+import { Link } from 'react-router';
+
 import { Input } from '@components';
 
 import type { ChangeEvent } from 'react';
 
 type TCharacterNameField = {
   name: string;
+  characterLink: string;
   isEditing: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClear: (value: string) => void;
@@ -11,6 +14,7 @@ type TCharacterNameField = {
 
 export const CharacterNameField = ({
   name,
+  characterLink,
   isEditing,
   onChange,
   onClear
@@ -24,7 +28,9 @@ export const CharacterNameField = ({
           onClear={onClear}
         />
       ) : (
-        <p>{name}</p>
+        <Link to={characterLink}>
+          <p>{name}</p>
+        </Link>
       )}
     </div>
   );
