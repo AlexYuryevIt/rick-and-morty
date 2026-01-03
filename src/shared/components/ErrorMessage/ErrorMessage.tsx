@@ -1,10 +1,6 @@
 import type { TErrorMessage } from './types';
 
-export const ErrorMessage = ({
-  message,
-  refetch,
-  onResetFilters
-}: TErrorMessage) => {
+export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
   return (
     <div className='flex flex-col items-center gap-4 p-8'>
       <p>{message}</p>
@@ -17,13 +13,13 @@ export const ErrorMessage = ({
           Попробовать еще раз
         </button>
       )}
-      {onResetFilters && (
+      {onGoBack && (
         <button
-          onClick={onResetFilters}
+          onClick={onGoBack}
           type='button'
           className='bg-teal-500 rounded-md p-2 w-full shadow-xl'
         >
-          Сбросить фильтры
+          Вернуться на главную
         </button>
       )}
     </div>

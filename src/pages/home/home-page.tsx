@@ -20,7 +20,7 @@ export const HomePage = () => {
 
   const debouncedFilters = useDebounce(filters);
 
-  const handleResetFilters = () => setFilters(initialFiltersState);
+  const handleGoBack = () => setFilters(initialFiltersState);
 
   const {
     characters,
@@ -49,7 +49,7 @@ export const HomePage = () => {
         <ErrorMessage
           message={errorMessage ?? UNEXPECTED_ERROR}
           refetch={refetch}
-          onResetFilters={handleResetFilters}
+          onGoBack={handleGoBack}
         />
       )}
 
@@ -67,13 +67,12 @@ export const HomePage = () => {
             loadMore={loadMore}
           >
             <div className='flex flex-wrap gap-7 items-center justify-center'>
-              {characters &&
-                characters.map((char) => (
-                  <CharacterCard
-                    character={char}
-                    key={char.id}
-                  />
-                ))}
+              {characters.map((char) => (
+                <CharacterCard
+                  character={char}
+                  key={char.id}
+                />
+              ))}
             </div>
           </InfiniteScroll>
         )}

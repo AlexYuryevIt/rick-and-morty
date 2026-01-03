@@ -6,8 +6,8 @@ export const ErrorPage = () => {
     <div className='flex flex-col w-full h-full justify-center items-center gap-4'>
       <img
         src={Crash}
-        width={'600px'}
-        height={'400px'}
+        width={600}
+        height={400}
       />
       <p className='font-bold text-xl text-teal-500'>{UI_ERROR}</p>
     </div>

@@ -2,7 +2,7 @@ import { isAxiosError } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { getCharacters } from '@api';
-import { ERROR_MESSAGES, UNEXPECTED_ERROR } from '@constants';
+import { ERROR_MESSAGES, initialPage, UNEXPECTED_ERROR } from '@constants';
 import { notify } from '@helpers';
 import { type TCharacter, type TFilters } from '@types';
 
@@ -15,8 +15,6 @@ type TUseGetCharactersProps = {
   loadMore: () => void;
   refetch: () => void;
 };
-
-const initialPage = 1;
 
 export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
   const [characters, setCharacters] = useState<TCharacter[]>([]);

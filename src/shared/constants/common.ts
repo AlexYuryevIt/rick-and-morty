@@ -5,3 +5,5 @@ export const LABELS = {
 
 export const UI_ERROR =
   'Морти, чёрт возьми, что ты наделал? Портал-ган барахлит, и мы застряли в измерении ошибок.';
+
+export const initialPage = 1;
