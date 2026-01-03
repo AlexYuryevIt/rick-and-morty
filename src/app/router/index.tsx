@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 
 import { MainLayout } from '@layouts';
-import { HomePage } from '@pages';
+import { CharacterPage, HomePage } from '@pages';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/character/:id',
-        element: <div>character page</div>
+        element: <CharacterPage />
       }
     ]
   }
