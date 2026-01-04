@@ -6,9 +6,9 @@ import { ErrorPage } from '@pages';
 
 export const MainLayout = () => {
   return (
-    <div className='min-h-screen flex flex-col bg-slate-50'>
+    <div className='min-h-screen flex flex-col bg-slate-50 w-screen'>
       <AppHeader />
-      <main className='flex-1 w-full py-6.5'>
+      <main className='flex-1 w-full py-6.5 overflow-x-hidden'>
         <div className='max-w-7xl mx-auto px-4'>
           <ErrorBoundary fallback={<ErrorPage />}>
             <Outlet />

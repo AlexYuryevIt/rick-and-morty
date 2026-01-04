@@ -13,6 +13,7 @@ body {
   line-height: 1.5;
   font-family: 'Roboto', system-ui, sans-serif;
   color: black;
+  overflow-x: hidden;
 }
 
 img {

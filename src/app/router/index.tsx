@@ -1,20 +1,30 @@
 import { createBrowserRouter } from 'react-router';
 
 import { MainLayout } from '@layouts';
-import { CharacterPage, HomePage } from '@pages';
+import { CharacterPage, HomePage, NotFoundPage } from '@pages';
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      element: <MainLayout />,
+      errorElement: <NotFoundPage />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />
+        },
+        {
+          path: '/character/:id',
+          element: <CharacterPage />
+        },
+        {
+          path: '*',
+          element: <NotFoundPage />
+        }
+      ]
+    }
+  ],
   {
-    element: <MainLayout />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />
-      },
-      {
-        path: '/character/:id',
-        element: <CharacterPage />
-      }
-    ]
+    basename: '/rick-and-morty'
   }
-]);
+);

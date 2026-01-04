@@ -48,7 +48,9 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
     <div className='relative flex gap-3 p-1.5 rounded-md shadow w-127 max-h-62 items-start group'>
       <img
         src={character.image}
-        className='w-60 h-58.5 rounded-md'
+        width={240}
+        height={234}
+        className='min-w-60 min-h-58.5 w-60 h-58.5 rounded-md'
         alt='character photo'
       />
 
