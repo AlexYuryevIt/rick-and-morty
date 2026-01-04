@@ -8,6 +8,9 @@ import svgr from 'vite-plugin-svgr';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), svgr()],
+  build: {
+    outDir: 'dist'
+  },
   resolve: {
     alias: [
       { find: '@app', replacement: path.resolve(__dirname, 'src/app') },
@@ -43,5 +46,6 @@ export default defineConfig({
         replacement: path.resolve(__dirname, 'src/shared/helpers')
       }
     ]
-  }
+  },
+  base: '/rick-and-morty/'
 });

@@ -60,6 +60,8 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
         setIsError(true);
         setErrorMessage(UNEXPECTED_ERROR);
         setCharacters([]);
+        setHasNext(false);
+        setPage(initialPage);
 
         if (isAxiosError(error)) {
           const message = getErrorMessage(error);
