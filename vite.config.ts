@@ -11,6 +11,7 @@ export default defineConfig({
   build: {
     outDir: 'dist'
   },
+  base: '/rick-and-morty/',
   resolve: {
     alias: [
       { find: '@app', replacement: path.resolve(__dirname, 'src/app') },
@@ -46,6 +47,5 @@ export default defineConfig({
         replacement: path.resolve(__dirname, 'src/shared/helpers')
       }
     ]
-  },
-  base: '/rick-and-morty/'
+  }
 });
