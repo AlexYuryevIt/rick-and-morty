@@ -22,10 +22,10 @@ React, Typescript, React Router, Tailwind.
 git clone https://github.com/alexyuryevit/rick-and-morty.git
 cd rick-and-morty
 
-# 2. Установить зависимости
+### Установить зависимости
 
 yarn install
 
-# 3. Запустить в режиме разработки (localhost:5173)
+### Запустить в режиме разработки (localhost:5173)
 
 yarn dev
