@@ -1,5 +1,5 @@
-export * from './api-errors';
+export * from './apiErrors';
 export * from './character';
 export * from './common';
-export * from './selector-options';
+export * from './selectorOptions';
 export * from './themes';

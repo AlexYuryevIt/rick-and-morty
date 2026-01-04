@@ -1,3 +1,3 @@
-export { useGetCharacter } from './use-get-character';
-export { useGetCharacters } from './use-get-characters';
 export { useDebounce } from './useDebounce';
+export { useGetCharacter } from './useGetCharacter';
+export { useGetCharacters } from './useGetCharacters';

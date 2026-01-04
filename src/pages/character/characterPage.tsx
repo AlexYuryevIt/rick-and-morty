@@ -50,6 +50,7 @@ export const CharacterPage = () => {
             <img
               src={character?.image}
               className='rounded-full w-75 h-75 border-2 border-gray-300'
+              alt='character photo'
             />
 
             <h1 className='mb-10.5 text-center'>{character?.name}</h1>

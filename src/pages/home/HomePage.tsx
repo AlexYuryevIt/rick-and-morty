@@ -39,6 +39,7 @@ export const HomePage = () => {
         src={banner}
         width={600}
         height={200}
+        alt='Rick And Morty text logo'
       />
 
       <CharacterFilters

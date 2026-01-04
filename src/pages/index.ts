@@ -1,3 +1,3 @@
-export * from './character/characterPage';
-export * from './error/error-page';
-export * from './home/home-page';
+export * from './character/CharacterPage';
+export * from './error/ErrorPage';
+export * from './home/HomePage';

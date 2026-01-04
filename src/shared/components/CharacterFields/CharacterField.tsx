@@ -22,7 +22,7 @@ export const CharacterField = ({
       style
     )}
   >
-    <p className='text-base font-medium text-[#3F3F3F]'>{label}</p>
-    <p className='text-black/60 text-sm'>{children}</p>
+    <p className='text-base font-medium text-[#3F3F3F]'>{label ?? ''}</p>
+    <p className='text-black/60 text-sm'>{children ?? ''}</p>
   </div>
 );

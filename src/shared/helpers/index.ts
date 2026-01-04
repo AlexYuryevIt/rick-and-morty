@@ -1,4 +1,4 @@
-export { getErrorMessage } from './get-error-message';
+export { getErrorMessage } from './getErrorMessage';
 export { notify } from './notify';
 
-export { classNames } from './class-names';
+export { classNames } from './classNames';
