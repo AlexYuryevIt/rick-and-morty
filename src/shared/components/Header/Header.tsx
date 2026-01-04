@@ -28,8 +28,8 @@ export const AppHeader = () => {
   const currentTheme = theme === ColorScheme.Light ? <Sun /> : <Moon />;
 
   return (
-    <header className='w-full h-15 bg-white shadow'>
-      <div className='max-w-7xl mx-auto px-4 flex items-center justify-between h-full'>
+    <header className='w-screen h-15 bg-white shadow'>
+      <div className='max-w-7xl w-screen mx-auto px-4 flex items-center justify-between h-full'>
         <HeaderLogo />
         <div className='flex gap-4'>
           <IconButton
