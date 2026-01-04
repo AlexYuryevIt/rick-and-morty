@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { BASE_URL, ENDPOINTS } from '../paths';
-import { getParams } from '../utils/get-params';
+import { getParams } from '../utils/getParams';
 
 import type { TFilters } from '@types';
 

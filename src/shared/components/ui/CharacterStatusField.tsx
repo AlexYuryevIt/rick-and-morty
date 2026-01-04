@@ -1,7 +1,7 @@
 import { Selector, StatusDot } from '@components';
 import { statusOptions } from '@constants';
 
-import { getCharacterStatus } from '../utils/get-status';
+import { getCharacterStatus } from '../CharacterFields/utils/get-status';
 
 import type { Status } from '@types';
 

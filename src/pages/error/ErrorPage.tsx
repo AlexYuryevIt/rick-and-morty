@@ -8,6 +8,7 @@ export const ErrorPage = () => {
         src={Crash}
         width={600}
         height={400}
+        alt='crashed ship'
       />
       <p className='font-bold text-xl text-teal-500'>{UI_ERROR}</p>
     </div>
