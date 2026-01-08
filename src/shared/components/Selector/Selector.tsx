@@ -114,7 +114,11 @@ export const Selector = <T,>({
             return (
               <li
                 key={String(option.value)}
-                onClick={() => handleSelect(option.value)}
+                onClick={() => {
+                  if (option.value) {
+                    handleSelect(option.value);
+                  }
+                }}
                 className={classNames(
                   selectorSizes[size].option,
                   'flex items-center gap-1 text-left cursor-default text-black/60 hover:text-black'

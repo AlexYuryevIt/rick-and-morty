@@ -5,8 +5,7 @@ import { ColorScheme, LABELS, ThemeLanguage } from '@constants';
 
 import { IconButton } from '../IconButton/IconButton';
 
-type TLang = (typeof ThemeLanguage)[keyof typeof ThemeLanguage];
-type TTheme = (typeof ColorScheme)[keyof typeof ColorScheme];
+import type { TLang, TTheme } from './types';
 
 export const AppHeader = () => {
   const [lang, setLang] = useState<TLang>(ThemeLanguage.Ru);
@@ -24,7 +23,7 @@ export const AppHeader = () => {
     );
   };
 
-  const currentLanguage = lang === 'ru' ? LABELS.ruLang : LABELS.enLang;
+  const currentLanguage = lang === 'ru' ? LABELS.RU_LANG : LABELS.EN_LANG;
   const currentTheme = theme === ColorScheme.Light ? <Sun /> : <Moon />;
 
   return (

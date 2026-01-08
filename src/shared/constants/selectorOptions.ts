@@ -1,4 +1,6 @@
-export const speciesOptions = [
+import type { TGenderOptions, TSpeciesOptions, TStatusOptions } from '@types';
+
+export const speciesOptions: TSpeciesOptions[] = [
   { value: 'alien', label: 'Alien' },
   { value: 'animal', label: 'Animal' },
   { value: 'human', label: 'Human' },
@@ -9,13 +11,13 @@ export const speciesOptions = [
   { value: 'unknown', label: 'Unknown' }
 ];
 
-export const statusOptions = [
-  { value: 'alive' as const, label: 'Alive' },
-  { value: 'dead' as const, label: 'Dead' },
-  { value: 'unknown' as const, label: 'Unknown' }
+export const statusOptions: TStatusOptions[] = [
+  { value: 'alive', label: 'Alive' },
+  { value: 'dead', label: 'Dead' },
+  { value: 'unknown', label: 'Unknown' }
 ];
 
-export const genderOptions = [
+export const genderOptions: TGenderOptions[] = [
   { value: 'female', label: 'Female' },
   { value: 'male', label: 'Male' },
   { value: 'genderless', label: 'Genderless' },

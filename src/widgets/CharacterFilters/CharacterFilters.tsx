@@ -2,7 +2,12 @@ import { useCallback, type ChangeEvent } from 'react';
 
 import { Search } from '@assets';
 import { Input, Selector } from '@components';
-import { genderOptions, speciesOptions, statusOptions } from '@constants';
+import {
+  CHARACTER_FIELDS_LABELS,
+  genderOptions,
+  speciesOptions,
+  statusOptions
+} from '@constants';
 import { type TFilters } from '@types';
 
 import type { TFiltersProps } from './types';
@@ -38,19 +43,19 @@ export const CharacterFilters = ({ filters, setFilters }: TFiltersProps) => {
       <Selector
         options={speciesOptions}
         value={filters.species}
-        placeholder='Species'
+        placeholder={CHARACTER_FIELDS_LABELS.SPECIES}
         onSelect={(value) => handleSetFilter(value, 'species')}
       />
       <Selector
         options={genderOptions}
         value={filters.gender}
-        placeholder='Gender'
+        placeholder={CHARACTER_FIELDS_LABELS.GENDER}
         onSelect={(value) => handleSetFilter(value, 'gender')}
       />
       <Selector
         options={statusOptions}
         value={filters.status}
-        placeholder='Status'
+        placeholder={CHARACTER_FIELDS_LABELS.STATUS}
         onSelect={(value) => handleSetFilter(value, 'status')}
       />
     </div>

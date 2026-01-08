@@ -1,10 +1,6 @@
 import { classNames } from '@helpers';
 
-import type { Status } from '@types';
-
-type TStatusDotProps = {
-  status: Status;
-};
+import type { TStatusDotProps } from './types';
 
 const colorByStatus = {
   alive: 'bg-green-500',

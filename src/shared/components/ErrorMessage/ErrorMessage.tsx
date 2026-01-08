@@ -1,3 +1,5 @@
+import { LABELS } from '@constants';
+
 import type { TErrorMessage } from './types';
 
 export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
@@ -10,7 +12,7 @@ export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
           type='button'
           className='bg-teal-500 rounded-md p-2 w-full shadow-xl'
         >
-          Попробовать еще раз
+          {LABELS.RETRY}
         </button>
       )}
       {onGoBack && (
@@ -19,7 +21,7 @@ export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
           type='button'
           className='bg-teal-500 rounded-md p-2 w-full shadow-xl'
         >
-          Вернуться на главную
+          {LABELS.GO_TO_MAIN_PAGE}
         </button>
       )}
     </div>
