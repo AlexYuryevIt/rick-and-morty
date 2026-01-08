@@ -2,7 +2,7 @@ import type { ComponentType } from 'react';
 
 export type TOption<T> = {
   label: string;
-  value: T;
+  value: T | null;
 };
 
 export type TDefaultOptionComponentProps<T> = {

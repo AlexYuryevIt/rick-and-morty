@@ -7,12 +7,10 @@ import {
   CharacterStatusField,
   IconButton
 } from '@components';
+import { CHARACTER_FIELDS_LABELS, ROUTES } from '@constants';
 import { type Status, type TCharacter } from '@types';
 
-export type TCharacterCardProps = {
-  character: TCharacter;
-  onSave: (character: TCharacter) => void;
-};
+import type { TCharacterCardProps } from './types';
 
 export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -57,20 +55,24 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
       <div className='w-full flex flex-col gap-2'>
         <CharacterNameField
           name={isEditing ? editedCharacter.name : character.name}
-          characterLink={`/character/${character.id}`}
+          characterLink={ROUTES.CHARACTER_PAGE(character.id)}
           isEditing={isEditing}
           onChange={handleEditName}
           onClear={handleClearName}
         />
 
-        <CharacterField label='Gender'>{character.gender}</CharacterField>
-        <CharacterField label='Species'>{character.species}</CharacterField>
-        <CharacterField label='Location'>
+        <CharacterField label={CHARACTER_FIELDS_LABELS.GENDER}>
+          {character.gender}
+        </CharacterField>
+        <CharacterField label={CHARACTER_FIELDS_LABELS.SPECIES}>
+          {character.species}
+        </CharacterField>
+        <CharacterField label={CHARACTER_FIELDS_LABELS.LOCATION}>
           {character.location.name}
         </CharacterField>
 
         <CharacterStatusField
-          label='Status'
+          label={CHARACTER_FIELDS_LABELS.STATUS}
           characterStatus={
             isEditing ? editedCharacter.status : character.status
           }

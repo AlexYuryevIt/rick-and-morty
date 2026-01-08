@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 
 import { NotFound } from '@assets';
+import { LABELS, ROUTES } from '@constants';
 
 export const NotFoundPage = () => {
   return (
@@ -11,10 +12,10 @@ export const NotFoundPage = () => {
         className='w-135 h-83.25 bg-transparent'
       />
       <Link
-        to='/'
+        to={ROUTES.MAIN}
         className='flex justify-center items-center w-60 h-14 border border-black/35 rounded-lg'
       >
-        <p className='font-karla'>Go to main page</p>
+        <p className='font-karla'>{LABELS.GO_TO_MAIN_PAGE_EN}</p>
       </Link>
     </div>
   );
