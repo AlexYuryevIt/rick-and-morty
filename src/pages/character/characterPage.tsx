@@ -9,7 +9,7 @@ import {
   NOTIFICATION_TYPE
 } from '@constants';
 import { notify } from '@helpers';
-import { useGetCharacter } from '@hooks';
+import { useCharactersStore } from '@stores';
 
 import { CharacterFieldsList } from './ui/CharacterFieldsList';
 
@@ -17,9 +17,12 @@ export const CharacterPage = () => {
   const navigate = useNavigate();
   const { id: characterId } = useParams();
 
-  const { character, isLoading, isError, errorMessage } = useGetCharacter(
-    Number(characterId)
-  );
+  const { character, isLoading, isError, errorMessage, fetchCharacter } =
+    useCharactersStore();
+
+  useEffect(() => {
+    fetchCharacter(Number(characterId));
+  }, [characterId, fetchCharacter]);
 
   useEffect(() => {
     if (isError && errorMessage) {
