@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 import { banner } from '@assets';
 import { ErrorMessage, InfiniteScroll, Loader } from '@components';
 import { NOTIFICATION_TYPE, NOTIFICATIONS, UNEXPECTED_ERROR } from '@constants';
 import { notify } from '@helpers';
-import { useDebounce, useGetCharacters } from '@hooks';
+import { useGetCharacters } from '@hooks';
 import { CharacterCard, CharacterFilters } from '@widgets';
 
 import type { TCharacter, TFilters } from '@types';
@@ -18,21 +18,22 @@ const initialFiltersState = {
 
 export const HomePage = () => {
   const [filters, setFilters] = useState<TFilters>(initialFiltersState);
+  const [isPending, startTransition] = useTransition();
 
-  const debouncedFilters = useDebounce(filters);
-
-  const handleGoBack = () => setFilters(initialFiltersState);
+  const handleGoBack = () => {
+    setFilters(initialFiltersState);
+  };
 
   const {
     characters,
     isLoading,
     isError,
     errorMessage,
-    hasNext,
+    hasNextPage,
     loadMore,
     refetch,
     updateCharacter
-  } = useGetCharacters(debouncedFilters);
+  } = useGetCharacters(filters);
 
   useEffect(() => {
     if (errorMessage) {
@@ -41,7 +42,9 @@ export const HomePage = () => {
   }, [errorMessage]);
 
   const handleUpdateCharacter = (character: TCharacter) => {
-    updateCharacter(character);
+    startTransition(() => {
+      updateCharacter(character);
+    });
 
     if (!isError) {
       notify(NOTIFICATIONS.characterUpdated, NOTIFICATION_TYPE.success);
@@ -70,7 +73,7 @@ export const HomePage = () => {
         />
       )}
 
-      {isLoading && (
+      {(isLoading || isPending) && (
         <div>
           <Loader />
         </div>
@@ -78,7 +81,7 @@ export const HomePage = () => {
 
       <div className='flex flex-col gap-7 items-center'>
         <InfiniteScroll
-          hasNext={hasNext}
+          hasNext={hasNextPage}
           isLoading={isLoading}
           loadMore={loadMore}
         >
