@@ -1,14 +1,14 @@
 export const ERROR_MESSAGES: Record<number, string> = {
-  400: '🪐 Неверные координаты портала. Проверьте параметры!',
-  401: '🚀 Доступ закрыт. Требуется портал-ключ авторизации.',
-  403: '🔒 У вас нет пропуска в эту галактику.',
-  404: '🌌 Страница потерялась в галактике. Персонажи не найдены 😔',
-  408: '⏰ Таймаут межзвёздного прыжка. Сервер не отвечает.',
-  429: '⚡ Портал перегружен! Слишком много запросов, подождите.',
-  500: '💥 Взрыв на сервере Мультивселенной. Попробуйте позже.',
-  502: '🛰️ Шлюз повреждён. Сервер не на связи.',
-  503: '🔧 Галактическая служба на техобслуживании.',
-  504: '🌠 Таймаут гиперпрыжка. Шлюз не отвечает.'
+  400: '🪐 Incorrect portal coordinates. Please check the parameters!',
+  401: '🚀 Access denied. An authorization portal key is required.',
+  403: '🔒 You do not have a pass to this galaxy.',
+  404: '🌌 The page is lost in the galaxy. Characters not found 😔',
+  408: '⏰ Interstellar jump timeout. The server is not responding.',
+  429: '⚡ The portal is overloaded! Too many requests, please wait.',
+  500: '💥 A multiverse server explosion occurred. Please try again later.',
+  502: '🛰️ The gateway is damaged. The server is not reachable.',
+  503: '🔧 The galactic service is under maintenance.',
+  504: '🌠 Hyperjump timeout. The gateway is not responding.'
 };
 
-export const UNEXPECTED_ERROR = 'Космическая аномалия 😵‍💫';
+export const UNEXPECTED_ERROR = 'Cosmic anomaly 😵‍💫';

@@ -1,4 +1,5 @@
 export * from './CharacterFields/CharacterField';
+export * from './CharacterFields/CharacterImageField';
 export * from './CharacterFields/CharacterNameField';
 export * from './CharacterFields/CharacterStatusField';
 export * from './ErrorBoundary/ErrorBoundary';

@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { banner } from '@assets';
 import { ErrorMessage, InfiniteScroll, Loader } from '@components';
-import { UNEXPECTED_ERROR } from '@constants';
+import { NOTIFICATION_TYPE, NOTIFICATIONS, UNEXPECTED_ERROR } from '@constants';
+import { notify } from '@helpers';
 import { useDebounce, useGetCharacters } from '@hooks';
 import { CharacterCard, CharacterFilters } from '@widgets';
 
-import type { TFilters } from '@types';
+import type { TCharacter, TFilters } from '@types';
 
 const initialFiltersState = {
   name: '',
@@ -32,6 +33,20 @@ export const HomePage = () => {
     refetch,
     updateCharacter
   } = useGetCharacters(debouncedFilters);
+
+  useEffect(() => {
+    if (errorMessage) {
+      notify(errorMessage, NOTIFICATION_TYPE.error);
+    }
+  }, [errorMessage]);
+
+  const handleUpdateCharacter = (character: TCharacter) => {
+    updateCharacter(character);
+
+    if (!isError) {
+      notify(NOTIFICATIONS.characterUpdated, NOTIFICATION_TYPE.success);
+    }
+  };
 
   return (
     <div className='flex flex-col justify-center items-center gap-4'>
@@ -72,7 +87,7 @@ export const HomePage = () => {
               <CharacterCard
                 character={char}
                 key={char.id}
-                onSave={updateCharacter}
+                onSave={handleUpdateCharacter}
               />
             ))}
           </div>

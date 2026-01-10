@@ -31,7 +31,13 @@ export const CharacterFilters = ({ filters, setFilters }: TFiltersProps) => {
   };
 
   return (
-    <div className='flex gap-7 items-center justify-between'>
+    <div
+      className='
+      grid gap-4
+      grid-cols-2
+      lg:flex lg:items-center lg:justify-between lg:gap-7
+      '
+    >
       <Input
         onChange={handleSetName}
         onClear={handleClearName}

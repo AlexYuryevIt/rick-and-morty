@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { BASE_URL, ENDPOINTS } from '../paths';
-import { getParams } from '../utils/getParams';
+import { getQueryParams } from '../utils/getQueryParams';
 
 import type { TFilters } from '@types';
 
@@ -12,7 +12,7 @@ export const getCharacters = async (
 ) => {
   const URL = `${BASE_URL}${ENDPOINTS.characters}`;
 
-  const params: Record<string, string> = getParams(filters);
+  const params: Record<string, string> = getQueryParams(filters);
 
   const { data } = await axios.get(URL, {
     params: { ...params, page },
