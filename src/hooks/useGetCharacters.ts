@@ -1,5 +1,11 @@
 import { isAxiosError } from 'axios';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  startTransition,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 
 import { getCharacters } from '@api';
 import { initialPage, pageStep, UNEXPECTED_ERROR } from '@constants';
@@ -47,12 +53,14 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
           controller.signal
         );
 
-        setCharacters((prev) =>
-          pageToLoad === initialPage ? newChars : [...prev, ...newChars]
-        );
+        startTransition(() => {
+          setCharacters((prev) =>
+            pageToLoad === initialPage ? newChars : [...prev, ...newChars]
+          );
 
-        setHasNextPage(hasNext);
-        setPage(pageToLoad);
+          setHasNextPage(hasNext);
+          setPage(pageToLoad);
+        });
       } catch (error: unknown) {
         if (isAxiosError(error) && error.code === 'CanceledError') return;
 
