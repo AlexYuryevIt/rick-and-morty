@@ -1,8 +1,9 @@
-import { useState, type ChangeEvent } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
 
 import { Checkmark, Close, Edit } from '@assets';
 import {
   CharacterField,
+  CharacterImageField,
   CharacterNameField,
   CharacterStatusField,
   IconButton
@@ -16,6 +17,12 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedCharacter, setEditedCharacter] = useState<TCharacter>(character);
 
+  useEffect(() => {
+    if (!isEditing) {
+      setEditedCharacter(character);
+    }
+  }, [character, isEditing]);
+
   const handleEditCard = () => setIsEditing((prev) => !prev);
 
   const handleEditName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,8 +35,8 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
     setEditedCharacter((prev) => ({ ...prev, status }));
   };
 
-  const handleClearName = (name: string) => {
-    setEditedCharacter((prev) => ({ ...prev, name }));
+  const handleClearName = () => {
+    setEditedCharacter((prev) => ({ ...prev, name: '' }));
   };
 
   const handleCancelEdit = () => {
@@ -44,12 +51,10 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
 
   return (
     <div className='relative flex gap-3 p-1.5 rounded-md shadow w-127 max-h-62 items-start group'>
-      <img
-        src={character.image}
-        width={240}
-        height={234}
-        className='min-w-60 min-h-58.5 w-60 h-58.5 rounded-md'
-        alt='character photo'
+      <CharacterImageField
+        src={character?.image}
+        alt={character?.name}
+        variant='card'
       />
 
       <div className='w-full flex flex-col gap-2'>
@@ -81,17 +86,7 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
         />
       </div>
 
-      {!isEditing && (
-        <IconButton
-          onClick={handleEditCard}
-          variant='plain'
-          className='absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-100'
-        >
-          <Edit />
-        </IconButton>
-      )}
-
-      {isEditing && (
+      {isEditing ? (
         <div className='absolute top-2 right-2 flex items-center'>
           <IconButton
             variant='plain'
@@ -108,6 +103,14 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
             <Checkmark />
           </IconButton>
         </div>
+      ) : (
+        <IconButton
+          onClick={handleEditCard}
+          variant='plain'
+          className='absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-100'
+        >
+          <Edit />
+        </IconButton>
       )}
     </div>
   );

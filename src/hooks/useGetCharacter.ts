@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { getCharacter } from '@api';
 import { UNEXPECTED_ERROR } from '@constants';
-import { getErrorMessage, notify } from '@helpers';
+import { getErrorMessage } from '@helpers';
 import { type TCharacter } from '@types';
 
 export const useGetCharacter = (characterId: number) => {
@@ -23,14 +23,15 @@ export const useGetCharacter = (characterId: number) => {
       setCharacter(char);
     } catch (error) {
       setIsError(true);
-      setErrorMessage(UNEXPECTED_ERROR);
       setCharacter(null);
 
       if (isAxiosError(error)) {
         const message = getErrorMessage(error);
-        setErrorMessage(message);
-        notify(message, 'error');
+
+        return setErrorMessage(message);
       }
+
+      setErrorMessage(UNEXPECTED_ERROR);
     } finally {
       setIsLoading(false);
     }

@@ -2,8 +2,8 @@ import { isAxiosError } from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { getCharacters } from '@api';
-import { initialPage, UNEXPECTED_ERROR } from '@constants';
-import { getErrorMessage, notify } from '@helpers';
+import { initialPage, pageStep, UNEXPECTED_ERROR } from '@constants';
+import { getErrorMessage } from '@helpers';
 import { type TCharacter, type TFilters } from '@types';
 
 type TUseGetCharactersProps = {
@@ -11,7 +11,7 @@ type TUseGetCharactersProps = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string | null;
-  hasNext: boolean;
+  hasNextPage: boolean;
   loadMore: () => void;
   refetch: () => void;
   updateCharacter: (character: TCharacter) => void;
@@ -20,7 +20,7 @@ type TUseGetCharactersProps = {
 export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
   const [characters, setCharacters] = useState<TCharacter[]>([]);
   const [page, setPage] = useState(initialPage);
-  const [hasNext, setHasNext] = useState(true);
+  const [hasNextPage, setHasNextPage] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -51,23 +51,22 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
           pageToLoad === initialPage ? newChars : [...prev, ...newChars]
         );
 
-        setHasNext(hasNext);
+        setHasNextPage(hasNext);
         setPage(pageToLoad);
       } catch (error: unknown) {
-        if (error instanceof DOMException && error.name === 'AbortError')
-          return;
+        if (isAxiosError(error) && error.code === 'CanceledError') return;
 
         setIsError(true);
-        setErrorMessage(UNEXPECTED_ERROR);
-        setCharacters([]);
-        setHasNext(false);
+        setHasNextPage(false);
         setPage(initialPage);
 
         if (isAxiosError(error)) {
           const message = getErrorMessage(error);
           setErrorMessage(message);
-          notify(message, 'error');
+          return;
         }
+
+        setErrorMessage(UNEXPECTED_ERROR);
       } finally {
         setIsLoading(false);
       }
@@ -81,34 +80,31 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
     return () => {
       controllerRef.current?.abort();
     };
-  }, [filters, getCharactersList]);
+  }, [getCharactersList]);
 
   const loadMore = useCallback(() => {
-    if (!hasNext || isLoading) return;
+    if (!hasNextPage || isLoading || isError) return;
 
-    getCharactersList(page + 1);
-  }, [hasNext, isLoading, page, getCharactersList]);
+    getCharactersList(page + pageStep);
+  }, [hasNextPage, isLoading, isError, page, getCharactersList]);
 
   const refetch = useCallback(() => {
     getCharactersList(initialPage);
   }, [getCharactersList]);
 
-  const updateCharacter = (updatedCharacter: TCharacter) => {
+  const updateCharacter = (updatedCharacter: TCharacter) =>
     setCharacters((prev) =>
       prev.map((char) =>
         char.id === updatedCharacter.id ? updatedCharacter : char
       )
     );
 
-    notify('Данные персонажа обновлены', 'success');
-  };
-
   return {
     characters,
     isLoading,
     isError,
     errorMessage,
-    hasNext,
+    hasNextPage,
     loadMore,
     refetch,
     updateCharacter
