@@ -1,5 +1,5 @@
 export const NOTIFICATIONS = {
-  characterUpdated: 'Данные персонажа обновлены'
+  characterUpdated: 'Character updated'
 };
 
 export const NOTIFICATION_TYPE = {

@@ -11,7 +11,7 @@ type TUseGetCharactersProps = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string | null;
-  hasNext: boolean;
+  hasNextPage: boolean;
   loadMore: () => void;
   refetch: () => void;
   updateCharacter: (character: TCharacter) => void;
@@ -104,7 +104,7 @@ export const useGetCharacters = (filters: TFilters): TUseGetCharactersProps => {
     isLoading,
     isError,
     errorMessage,
-    hasNext: hasNextPage,
+    hasNextPage,
     loadMore,
     refetch,
     updateCharacter

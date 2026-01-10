@@ -1,5 +1,7 @@
 import { toast } from 'react-toastify';
 
+import type { TToast } from '@types';
+
 const TOAST_OPTIONS = {
   position: 'bottom-right',
   autoClose: 4000,
@@ -10,9 +12,6 @@ const TOAST_OPTIONS = {
   theme: 'colored'
 } as const;
 
-export const notify = (
-  message: string,
-  type: 'success' | 'error' | 'info' | 'warning'
-) => {
+export const notify = (message: string, type: TToast) => {
   toast[type](message, TOAST_OPTIONS);
 };

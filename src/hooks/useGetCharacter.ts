@@ -8,8 +8,8 @@ import { type TCharacter } from '@types';
 
 export const useGetCharacter = (characterId: number) => {
   const [character, setCharacter] = useState<TCharacter | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const getCharacterInfo = useCallback(async () => {
