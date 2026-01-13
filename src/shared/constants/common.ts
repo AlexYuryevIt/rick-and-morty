@@ -1,9 +1,8 @@
 export const LABELS = {
-  RU_LANG: 'РУ',
+  RU_LANG: 'RU',
   EN_LANG: 'EN',
-  GO_TO_MAIN_PAGE_EN: 'Go to main page',
-  RETRY: 'Попробовать еще раз',
-  GO_TO_MAIN_PAGE: 'Вернуться на главную'
+  GO_TO_MAIN_PAGE: 'Go to main page',
+  RETRY: 'Retry'
 };
 
 export const UI_ERROR =

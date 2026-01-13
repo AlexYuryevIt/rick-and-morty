@@ -1,26 +1,23 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
 
-import { CharacterSlice, type TCharacterSlice } from './slices/characterSlice';
-import {
-  CharactersListSlice,
-  type TCharactersListSlice
-} from './slices/charactersListSlice';
-import { FiltersSlice, type TFiltersSlice } from './slices/filtersSlice';
+import { initialPage } from '@constants';
 
-export type TCharactersStoreState = TCharactersListSlice &
-  TCharacterSlice &
-  TFiltersSlice;
+import type { TCharacter } from '@types';
 
-export const useCharactersStore = create<TCharactersStoreState>()(
-  devtools(
-    (set, get, state) => ({
-      ...CharactersListSlice(set, get, state),
-      ...CharacterSlice(set, get, state),
-      ...FiltersSlice(set, get, state)
-    }),
-    {
-      name: 'characters-store'
-    }
-  )
-);
+export type TCharactersListStore = {
+  characters: TCharacter[];
+  page: number;
+  hasNextPage: boolean;
+  setPage: (page: number) => void;
+  setHasNextPage: (hasNextPage: boolean) => void;
+  setCharacters: (characters: TCharacter[]) => void;
+};
+
+export const useCharactersStore = create<TCharactersListStore>()((set) => ({
+  characters: [],
+  page: initialPage,
+  hasNextPage: false,
+  setCharacters: (characters: TCharacter[]) => set({ characters }),
+  setPage: (page: number) => set({ page }),
+  setHasNextPage: (hasNextPage: boolean) => set({ hasNextPage })
+}));

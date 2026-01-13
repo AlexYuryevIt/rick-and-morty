@@ -1,2 +1,3 @@
 export { useDebounce } from './useDebounce';
-export { useFilters } from './useFilters';
+export { useGetCharacter } from './useGetCharacter';
+export { useGetCharacters } from './useGetCharacters';

@@ -10,7 +10,7 @@ export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
         <button
           onClick={refetch}
           type='button'
-          className='bg-teal-500 rounded-md p-2 w-full shadow-xl'
+          className='bg-teal-500 rounded-md p-2 w-full shadow-xl cursor-pointer'
         >
           {LABELS.RETRY}
         </button>
@@ -19,7 +19,7 @@ export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
         <button
           onClick={onGoBack}
           type='button'
-          className='bg-teal-500 rounded-md p-2 w-full shadow-xl'
+          className='bg-teal-500 rounded-md p-2 w-full shadow-xl cursor-pointer'
         >
           {LABELS.GO_TO_MAIN_PAGE}
         </button>

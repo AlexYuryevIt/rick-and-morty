@@ -1,31 +1,29 @@
-import { startTransition, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { banner } from '@assets';
 import { ErrorMessage, InfiniteScroll, Loader } from '@components';
 import { NOTIFICATION_TYPE, NOTIFICATIONS, UNEXPECTED_ERROR } from '@constants';
 import { notify } from '@helpers';
-import { useFilters } from '@hooks';
-import { useCharactersStore } from '@stores';
+import { useGetCharacters } from '@hooks';
+import { useCharactersStore, useFiltersStore } from '@stores';
 import { CharacterCard, CharacterFilters } from '@widgets';
 
 import type { TCharacter } from '@types';
 
 export const HomePage = () => {
+  const { resetFilters } = useFiltersStore();
+
   const {
-    characters,
-    filters,
-    isError,
-    isLoading,
-    isLoadingMore,
-    hasNextPage,
     errorMessage,
-    refetch,
+    isLoading,
+    isError,
+    isLoadingMore,
     loadMore,
     updateCharacter,
-    resetFilters
-  } = useCharactersStore();
+    refetch
+  } = useGetCharacters();
 
-  useFilters();
+  const { characters, hasNextPage } = useCharactersStore();
 
   useEffect(() => {
     if (errorMessage) {
@@ -38,9 +36,7 @@ export const HomePage = () => {
   };
 
   const handleUpdateCharacter = (character: TCharacter) => {
-    startTransition(() => {
-      updateCharacter(character);
-    });
+    updateCharacter(character);
 
     if (!isError) {
       notify(NOTIFICATIONS.characterUpdated, NOTIFICATION_TYPE.success);
@@ -48,10 +44,8 @@ export const HomePage = () => {
   };
 
   const handleLoadMore = useCallback(() => {
-    startTransition(() => {
-      loadMore(filters);
-    });
-  }, [loadMore, filters]);
+    loadMore();
+  }, [loadMore]);
 
   return (
     <div className='flex flex-col justify-center items-center gap-4'>

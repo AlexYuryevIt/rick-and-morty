@@ -11,8 +11,10 @@ export const getCharacters = async (
   signal?: AbortSignal
 ) => {
   const URL = `${BASE_URL}${ENDPOINTS.characters}`;
-
+  console.log(filters);
   const params: Record<string, string> = getQueryParams(filters);
+
+  console.log('Fetching characters with params:', { ...params, page });
 
   const { data } = await axios.get(URL, {
     params: { ...params, page },

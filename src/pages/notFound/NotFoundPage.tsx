@@ -13,9 +13,9 @@ export const NotFoundPage = () => {
       />
       <Link
         to={ROUTES.MAIN}
-        className='flex justify-center items-center w-60 h-14 border border-black/35 rounded-lg'
+        className='flex justify-center items-center w-60 h-14 border border-black/35 rounded-lg cursor-pointer'
       >
-        <p className='font-karla'>{LABELS.GO_TO_MAIN_PAGE_EN}</p>
+        <p className='font-karla'>{LABELS.GO_TO_MAIN_PAGE}</p>
       </Link>
     </div>
   );

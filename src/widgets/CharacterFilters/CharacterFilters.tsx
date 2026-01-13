@@ -1,4 +1,4 @@
-import { useCallback, type ChangeEvent } from 'react';
+import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
 
 import { Search } from '@assets';
 import { Input, Selector } from '@components';
@@ -8,21 +8,32 @@ import {
   speciesOptions,
   statusOptions
 } from '@constants';
-import { useCharactersStore } from '@stores';
+import { useDebounce } from '@hooks';
+import { useFiltersStore } from '@stores';
 
 export const CharacterFilters = () => {
-  const { filters, setFilter } = useCharactersStore();
+  const { filters, setFilter } = useFiltersStore();
+
+  const [name, setName] = useState(filters.name);
+  const debouncedName = useDebounce(name);
 
   const handleSetName = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
-      setFilter(value, 'name');
+      setName(value);
     },
-    [setFilter]
+    [setName]
   );
 
+  useEffect(() => {
+    if (debouncedName) {
+      setFilter(debouncedName, 'name');
+    }
+  }, [debouncedName, setFilter]);
+
   const handleClearName = () => {
+    setName('');
     setFilter('', 'name');
   };
 
@@ -37,7 +48,7 @@ export const CharacterFilters = () => {
       <Input
         onChange={handleSetName}
         onClear={handleClearName}
-        value={filters.name}
+        value={name}
         icon={<Search />}
         size='big'
         placeholder='Filter by name...'

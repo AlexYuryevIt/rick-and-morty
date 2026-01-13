@@ -1,7 +1,8 @@
-import type { TFilters } from '@types';
-import type { StateCreator } from 'zustand';
+import { create } from 'zustand';
 
-export type TFiltersSlice = {
+import type { TFilters } from '@types';
+
+export type TFiltersStore = {
   filters: TFilters;
   setFilter: (value: string | null, field: keyof TFilters) => void;
   resetFilters: () => void;
@@ -14,7 +15,7 @@ const initialFiltersState = {
   status: null
 };
 
-export const FiltersSlice: StateCreator<TFiltersSlice> = (set) => ({
+export const useFiltersStore = create<TFiltersStore>()((set) => ({
   filters: initialFiltersState,
 
   setFilter: (value, field) => {
@@ -26,4 +27,4 @@ export const FiltersSlice: StateCreator<TFiltersSlice> = (set) => ({
   resetFilters: () => {
     set({ filters: initialFiltersState });
   }
-});
+}));
