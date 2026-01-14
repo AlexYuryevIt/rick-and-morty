@@ -3,7 +3,7 @@ import { isAxiosError } from 'axios';
 import { useEffect } from 'react';
 
 import { getCharacter } from '@api';
-import { UNEXPECTED_ERROR } from '@constants';
+import { staleTime, UNEXPECTED_ERROR } from '@constants';
 import { getErrorMessage } from '@helpers';
 import { useCharacterStore } from '@stores';
 
@@ -13,7 +13,7 @@ export const useGetCharacter = (characterId: number) => {
   const { data, isFetching, isPending, isError, error } = useQuery({
     queryKey: ['character', characterId],
     queryFn: () => getCharacter(characterId),
-    staleTime: 1000 * 60 * 5
+    staleTime
   });
 
   useEffect(() => {

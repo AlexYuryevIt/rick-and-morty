@@ -3,14 +3,20 @@ import { isAxiosError } from 'axios';
 import { useEffect, useMemo } from 'react';
 
 import { getCharacters } from '@api';
-import { initialPage, pageStep, UNEXPECTED_ERROR } from '@constants';
+import {
+  gcTime,
+  initialPage,
+  pageStep,
+  staleTime,
+  UNEXPECTED_ERROR
+} from '@constants';
 import { getErrorMessage } from '@helpers';
 import { useCharactersStore, useFiltersStore } from '@stores';
 
 import type { TCharacter } from '@types';
 
 type TUseGetCharactersProps = {
-  isLoading: boolean;
+  isPending: boolean;
   isFetchingMore: boolean;
   isError: boolean;
   hasNextPage: boolean | undefined;
@@ -28,9 +34,6 @@ type TApiCharactersResponse = {
 export const useGetCharacters = (): TUseGetCharactersProps => {
   const filters = useFiltersStore((state) => state.filters);
   const { setCharacters, setHasNextPage } = useCharactersStore();
-
-  const staleTime = 1000 * 60 * 5;
-  const gcTime = 1000 * 60 * 10;
 
   const {
     data,
@@ -85,7 +88,7 @@ export const useGetCharacters = (): TUseGetCharactersProps => {
   }, [error]);
 
   return {
-    isLoading: isPending,
+    isPending,
     isFetchingMore: isFetchingNextPage,
     hasNextPage,
     isError,

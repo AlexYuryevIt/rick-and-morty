@@ -15,7 +15,7 @@ export const HomePage = () => {
 
   const {
     errorMessage,
-    isLoading,
+    isPending,
     isError,
     isFetchingMore,
     hasNextPage,
@@ -67,7 +67,7 @@ export const HomePage = () => {
         />
       )}
 
-      {isLoading && (
+      {isPending && (
         <div>
           <Loader />
         </div>
