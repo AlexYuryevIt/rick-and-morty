@@ -1,5 +1,6 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { getCharacters } from '@api';
 import { initialPage, pageStep, UNEXPECTED_ERROR } from '@constants';
@@ -10,81 +11,64 @@ import type { TCharacter } from '@types';
 
 type TUseGetCharactersProps = {
   isLoading: boolean;
-  isLoadingMore: boolean;
+  isFetchingMore: boolean;
   isError: boolean;
+  hasNextPage: boolean | undefined;
   errorMessage: string | null;
   loadMore: () => void;
   refetch: () => void;
   updateCharacter: (character: TCharacter) => void;
 };
 
+type TApiCharactersResponse = {
+  characters: TCharacter[];
+  hasNext: boolean;
+};
+
 export const useGetCharacters = (): TUseGetCharactersProps => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
   const filters = useFiltersStore((state) => state.filters);
+  const { setCharacters, setHasNextPage } = useCharactersStore();
 
-  const getCharactersList = useCallback(
-    async (pageToLoad: number = initialPage) => {
-      const { characters, setCharacters, setPage, setHasNextPage } =
-        useCharactersStore.getState();
+  const staleTime = 1000 * 60 * 5;
+  const gcTime = 1000 * 60 * 10;
 
-      setIsLoading(true);
-      setIsError(false);
-      setErrorMessage(null);
-
-      if (pageToLoad > initialPage) {
-        setIsLoadingMore(true);
+  const {
+    data,
+    isPending,
+    isFetchingNextPage,
+    isError,
+    error,
+    hasNextPage,
+    fetchNextPage,
+    refetch
+  } = useInfiniteQuery({
+    queryKey: ['characters', 'infinite', filters],
+    queryFn: ({ pageParam = initialPage }) => getCharacters(filters, pageParam),
+    initialPageParam: initialPage,
+    getNextPageParam: (lastPage, _pages, lastPageParam) => {
+      if (!lastPage?.hasNext) {
+        return undefined;
       }
-
-      try {
-        const { characters: newChars, hasNext } = await getCharacters(
-          filters,
-          pageToLoad || initialPage
-        );
-
-        setCharacters(
-          pageToLoad === initialPage ? newChars : [...characters, ...newChars]
-        );
-
-        setHasNextPage(hasNext);
-        setPage(pageToLoad || initialPage);
-      } catch (error: unknown) {
-        setIsError(true);
-        setHasNextPage(false);
-        setPage(initialPage);
-
-        if (isAxiosError(error)) {
-          const message = getErrorMessage(error);
-          setErrorMessage(message);
-          return;
-        }
-
-        setErrorMessage(UNEXPECTED_ERROR);
-      } finally {
-        setIsLoading(false);
-      }
+      return lastPage.hasNext ? lastPageParam + pageStep : undefined;
     },
-    [filters]
-  );
+    staleTime,
+    gcTime
+  });
+
+  const characters = useMemo(() => {
+    if (!data?.pages) return [];
+
+    return data?.pages?.flatMap(
+      (page: TApiCharactersResponse) => page.characters
+    );
+  }, [data]);
 
   useEffect(() => {
-    getCharactersList();
-  }, [getCharactersList]);
-
-  const loadMore = useCallback(() => {
-    const { page, hasNextPage } = useCharactersStore.getState();
-
-    if (!hasNextPage || isLoading || isError) return;
-
-    getCharactersList(page + pageStep);
-  }, [isLoading, isError, getCharactersList]);
-
-  const refetch = useCallback(() => {
-    getCharactersList(initialPage);
-  }, [getCharactersList]);
+    if (characters.length > 0) {
+      setCharacters(characters);
+      setHasNextPage(hasNextPage || false);
+    }
+  }, [characters, hasNextPage, setCharacters, setHasNextPage]);
 
   const updateCharacter = (updatedCharacter: TCharacter) => {
     const { characters, setCharacters } = useCharactersStore.getState();
@@ -95,13 +79,19 @@ export const useGetCharacters = (): TUseGetCharactersProps => {
     );
   };
 
+  const errorMessage = useMemo(() => {
+    if (!error) return null;
+    return isAxiosError(error) ? getErrorMessage(error) : UNEXPECTED_ERROR;
+  }, [error]);
+
   return {
-    isLoading,
-    isLoadingMore,
+    isLoading: isPending,
+    isFetchingMore: isFetchingNextPage,
+    hasNextPage,
     isError,
     errorMessage,
-    loadMore,
-    refetch,
-    updateCharacter
+    loadMore: fetchNextPage,
+    updateCharacter,
+    refetch
   };
 };

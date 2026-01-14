@@ -4,7 +4,7 @@ import { Loader } from '../Loader/Loader';
 
 type TInfiniteScrollProps = {
   children: ReactNode;
-  hasNext: boolean;
+  hasNext?: boolean;
   isLoading: boolean;
   loadMore: () => void;
 };

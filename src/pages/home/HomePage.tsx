@@ -17,19 +17,20 @@ export const HomePage = () => {
     errorMessage,
     isLoading,
     isError,
-    isLoadingMore,
+    isFetchingMore,
+    hasNextPage,
     loadMore,
     updateCharacter,
     refetch
   } = useGetCharacters();
 
-  const { characters, hasNextPage } = useCharactersStore();
+  const { characters } = useCharactersStore();
 
   useEffect(() => {
-    if (errorMessage) {
+    if (isError && errorMessage) {
       notify(errorMessage, NOTIFICATION_TYPE.error);
     }
-  }, [errorMessage]);
+  }, [isError, errorMessage]);
 
   const handleGoBack = () => {
     resetFilters();
@@ -75,7 +76,7 @@ export const HomePage = () => {
       <div className='flex flex-col gap-7 items-center'>
         <InfiniteScroll
           hasNext={hasNextPage}
-          isLoading={isLoadingMore}
+          isLoading={isFetchingMore}
           loadMore={handleLoadMore}
         >
           <div className='flex flex-wrap gap-7 items-center justify-center'>

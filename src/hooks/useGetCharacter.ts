@@ -1,5 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { getCharacter } from '@api';
 import { UNEXPECTED_ERROR } from '@constants';
@@ -7,44 +8,29 @@ import { getErrorMessage } from '@helpers';
 import { useCharacterStore } from '@stores';
 
 export const useGetCharacter = (characterId: number) => {
-  const { character, setCharacter } = useCharacterStore();
+  const setCharacter = useCharacterStore((state) => state.setCharacter);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const getCharacterInfo = useCallback(async () => {
-    setIsLoading(true);
-    setIsError(false);
-    setErrorMessage(null);
-
-    try {
-      const char = await getCharacter(characterId);
-
-      setCharacter(char);
-    } catch (error) {
-      setIsError(true);
-      setCharacter(null);
-
-      if (isAxiosError(error)) {
-        const message = getErrorMessage(error);
-
-        return setErrorMessage(message);
-      }
-
-      setErrorMessage(UNEXPECTED_ERROR);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [characterId, setCharacter]);
+  const { data, isFetching, isPending, isError, error } = useQuery({
+    queryKey: ['character', characterId],
+    queryFn: () => getCharacter(characterId),
+    staleTime: 1000 * 60 * 5
+  });
 
   useEffect(() => {
-    getCharacterInfo();
-  }, [getCharacterInfo]);
+    if (!data || error) {
+      setCharacter(null);
+    }
+
+    setCharacter(data);
+  }, [data, error, setCharacter]);
+
+  const errorMessage = isAxiosError(error)
+    ? getErrorMessage(error)
+    : UNEXPECTED_ERROR;
 
   return {
-    character,
-    isLoading,
+    isLoading: isPending,
+    isFetching,
     isError,
     errorMessage
   };

@@ -12,6 +12,7 @@ export const CharacterFieldsList = ({
           label={char.label}
           bordered
           style='py-2.5'
+          key={char.label}
         >
           {char.value}
         </CharacterField>
