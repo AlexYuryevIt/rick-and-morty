@@ -1,4 +1,4 @@
-import { useCallback, type ChangeEvent } from 'react';
+import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
 
 import { Search } from '@assets';
 import { Input, Selector } from '@components';
@@ -8,26 +8,33 @@ import {
   speciesOptions,
   statusOptions
 } from '@constants';
-import { type TFilters } from '@types';
+import { useDebounce } from '@hooks';
+import { useFiltersStore } from '@stores';
 
-import type { TFiltersProps } from './types';
+export const CharacterFilters = () => {
+  const { filters, setFilter } = useFiltersStore();
 
-export const CharacterFilters = ({ filters, setFilters }: TFiltersProps) => {
-  const handleSetFilter = useCallback(
-    (value: string | null, field: keyof TFilters) => {
-      setFilters((prev) => ({ ...prev, [field]: value }));
+  const [name, setName] = useState(filters.name);
+  const debouncedName = useDebounce(name);
+
+  const handleSetName = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+
+      setName(value);
     },
-    [setFilters]
+    [setName]
   );
 
-  const handleSetName = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    setFilters((prev) => ({ ...prev, name: value }));
-  };
+  useEffect(() => {
+    if (debouncedName) {
+      setFilter(debouncedName, 'name');
+    }
+  }, [debouncedName, setFilter]);
 
   const handleClearName = () => {
-    setFilters((prev) => ({ ...prev, name: '' }));
+    setName('');
+    setFilter('', 'name');
   };
 
   return (
@@ -41,7 +48,7 @@ export const CharacterFilters = ({ filters, setFilters }: TFiltersProps) => {
       <Input
         onChange={handleSetName}
         onClear={handleClearName}
-        value={filters.name}
+        value={name}
         icon={<Search />}
         size='big'
         placeholder='Filter by name...'
@@ -50,19 +57,19 @@ export const CharacterFilters = ({ filters, setFilters }: TFiltersProps) => {
         options={speciesOptions}
         value={filters.species}
         placeholder={CHARACTER_FIELDS_LABELS.SPECIES}
-        onSelect={(value) => handleSetFilter(value, 'species')}
+        onSelect={(value) => setFilter(value, 'species')}
       />
       <Selector
         options={genderOptions}
         value={filters.gender}
         placeholder={CHARACTER_FIELDS_LABELS.GENDER}
-        onSelect={(value) => handleSetFilter(value, 'gender')}
+        onSelect={(value) => setFilter(value, 'gender')}
       />
       <Selector
         options={statusOptions}
         value={filters.status}
         placeholder={CHARACTER_FIELDS_LABELS.STATUS}
-        onSelect={(value) => handleSetFilter(value, 'status')}
+        onSelect={(value) => setFilter(value, 'status')}
       />
     </div>
   );

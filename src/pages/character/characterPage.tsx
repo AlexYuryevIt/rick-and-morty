@@ -10,6 +10,7 @@ import {
 } from '@constants';
 import { notify } from '@helpers';
 import { useGetCharacter } from '@hooks';
+import { useCharacterStore } from '@stores';
 
 import { CharacterFieldsList } from './ui/CharacterFieldsList';
 
@@ -17,9 +18,11 @@ export const CharacterPage = () => {
   const navigate = useNavigate();
   const { id: characterId } = useParams();
 
-  const { character, isLoading, isError, errorMessage } = useGetCharacter(
+  const { isLoading, isError, errorMessage } = useGetCharacter(
     Number(characterId)
   );
+
+  const { character } = useCharacterStore();
 
   useEffect(() => {
     if (isError && errorMessage) {

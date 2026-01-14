@@ -4,10 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { getCharacter } from '@api';
 import { UNEXPECTED_ERROR } from '@constants';
 import { getErrorMessage } from '@helpers';
-import { type TCharacter } from '@types';
+import { useCharacterStore } from '@stores';
 
 export const useGetCharacter = (characterId: number) => {
-  const [character, setCharacter] = useState<TCharacter | null>(null);
+  const { character, setCharacter } = useCharacterStore();
+
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -35,7 +36,7 @@ export const useGetCharacter = (characterId: number) => {
     } finally {
       setIsLoading(false);
     }
-  }, [characterId]);
+  }, [characterId, setCharacter]);
 
   useEffect(() => {
     getCharacterInfo();

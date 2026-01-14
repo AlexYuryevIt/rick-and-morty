@@ -1,39 +1,29 @@
-import { useEffect, useState, useTransition } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { banner } from '@assets';
 import { ErrorMessage, InfiniteScroll, Loader } from '@components';
 import { NOTIFICATION_TYPE, NOTIFICATIONS, UNEXPECTED_ERROR } from '@constants';
 import { notify } from '@helpers';
 import { useGetCharacters } from '@hooks';
+import { useCharactersStore, useFiltersStore } from '@stores';
 import { CharacterCard, CharacterFilters } from '@widgets';
 
-import type { TCharacter, TFilters } from '@types';
-
-const initialFiltersState = {
-  name: '',
-  species: null,
-  gender: null,
-  status: null
-};
+import type { TCharacter } from '@types';
 
 export const HomePage = () => {
-  const [filters, setFilters] = useState<TFilters>(initialFiltersState);
-  const [isPending, startTransition] = useTransition();
-
-  const handleGoBack = () => {
-    setFilters(initialFiltersState);
-  };
+  const { resetFilters } = useFiltersStore();
 
   const {
-    characters,
+    errorMessage,
     isLoading,
     isError,
-    errorMessage,
-    hasNextPage,
+    isLoadingMore,
     loadMore,
-    refetch,
-    updateCharacter
-  } = useGetCharacters(filters);
+    updateCharacter,
+    refetch
+  } = useGetCharacters();
+
+  const { characters, hasNextPage } = useCharactersStore();
 
   useEffect(() => {
     if (errorMessage) {
@@ -41,15 +31,21 @@ export const HomePage = () => {
     }
   }, [errorMessage]);
 
+  const handleGoBack = () => {
+    resetFilters();
+  };
+
   const handleUpdateCharacter = (character: TCharacter) => {
-    startTransition(() => {
-      updateCharacter(character);
-    });
+    updateCharacter(character);
 
     if (!isError) {
       notify(NOTIFICATIONS.characterUpdated, NOTIFICATION_TYPE.success);
     }
   };
+
+  const handleLoadMore = useCallback(() => {
+    loadMore();
+  }, [loadMore]);
 
   return (
     <div className='flex flex-col justify-center items-center gap-4'>
@@ -60,10 +56,7 @@ export const HomePage = () => {
         alt='Rick And Morty text logo'
       />
 
-      <CharacterFilters
-        filters={filters}
-        setFilters={setFilters}
-      />
+      <CharacterFilters />
 
       {isError && (
         <ErrorMessage
@@ -73,7 +66,7 @@ export const HomePage = () => {
         />
       )}
 
-      {(isLoading || isPending) && (
+      {isLoading && (
         <div>
           <Loader />
         </div>
@@ -82,8 +75,8 @@ export const HomePage = () => {
       <div className='flex flex-col gap-7 items-center'>
         <InfiniteScroll
           hasNext={hasNextPage}
-          isLoading={isLoading}
-          loadMore={loadMore}
+          isLoading={isLoadingMore}
+          loadMore={handleLoadMore}
         >
           <div className='flex flex-wrap gap-7 items-center justify-center'>
             {characters.map((char) => (
