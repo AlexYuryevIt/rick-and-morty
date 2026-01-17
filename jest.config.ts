@@ -64,8 +64,10 @@ const config: Config = {
     '^@helpers/(.*)$': '<rootDir>/src/shared/helpers/$1',
 
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '\\.(png|jpg|jpeg|gif|svg|webp)$': 'jest-transform-stub',
-    '\\.(png|jpg|jpeg|gif|webp)$': 'jest-transform-stub'
+
+    '^.+\\.svg\\?react$': '<rootDir>/src/test/__mocks__/svgMock.tsx',
+    '^.+\\.(png|jpg|jpeg|gif|webp)$': 'jest-transform-stub',
+    '^.+\\.svg$': '<rootDir>/src/test/__mocks__/svgMock.tsx'
   }
 };
 

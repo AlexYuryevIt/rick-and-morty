@@ -11,8 +11,7 @@
     "prettify": "prettier src --write",
     "build": "tsc -b && vite build",
     "deploy": "gh-pages -d dist",
-    "test": "jest",
-    "svg": "svgr --out-dir src/assets/icons/components --ignore-existing --typescript src/assets/icons/origin"
+    "test": "jest"
   },
   "dependencies": {
     "@tanstack/query-async-storage-persister": "^5.90.19",
@@ -26,7 +25,6 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@eslint/js": "^9.39.1",
-    "@svgr/cli": "^8.1.0",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/eslint-plugin-query": "^5.91.2",
     "@tanstack/react-query-devtools": "4",
