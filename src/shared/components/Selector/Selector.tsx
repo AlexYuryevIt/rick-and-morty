@@ -73,6 +73,7 @@ export const Selector = <T,>({
       ref={selectRef}
     >
       <button
+        data-testid='selector__button'
         onClick={handleMenuToggle}
         className={classNames(
           selectorSizes[size].button,
