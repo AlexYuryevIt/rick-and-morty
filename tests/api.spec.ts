@@ -71,11 +71,15 @@ test('Имена персонажей совпадают с указанными
 
 test('Делаем запрос со значением из инпута', async ({ page }) => {
   await page.route(URL, async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify(mockCharacter)
-    });
+    const url = route.request().url();
+
+    if (url.includes('name=Test+Sanchez')) {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(mockCharacter)
+      });
+    }
   });
 
   await page.goto('/');
