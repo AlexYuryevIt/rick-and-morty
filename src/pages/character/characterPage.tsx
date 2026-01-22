@@ -12,6 +12,7 @@ import { notify } from '@helpers';
 import { useGetCharacter } from '@hooks';
 import { useCharacterStore } from '@stores';
 
+import styles from './CharacterPage.module.scss';
 import { CharacterFieldsList } from './ui/CharacterFieldsList';
 
 export const CharacterPage = () => {
@@ -51,11 +52,11 @@ export const CharacterPage = () => {
   const handleGoBack = () => navigate(-1);
 
   return (
-    <div className='flex items-center justify-center relative'>
+    <div className={styles.character__page}>
       <IconButton
         variant='plain'
         onClick={handleGoBack}
-        className='absolute top-7 left-0 flex justify-between items-center gap-2'
+        className={styles.back__btn}
       >
         <ArrowLeft />
         <p>{CHARACTER_PAGE_LABELS.GO_BACK_BUTTON}</p>
@@ -65,7 +66,7 @@ export const CharacterPage = () => {
         {isLoading && <Loader />}
 
         {!character && !isLoading && (
-          <div className='flex flex-col items-center gap-4 text-center'>
+          <div className={styles.not__found_text}>
             {CHARACTER_PAGE_LABELS.CHARACTER_NOT_FOUND}
           </div>
         )}
@@ -80,9 +81,9 @@ export const CharacterPage = () => {
               variant='profile'
             />
 
-            <h1 className='mb-10.5 text-center'>{character?.name}</h1>
+            <h1 className={styles.header}>{character?.name}</h1>
 
-            <h2 className='mb-6 text-center text-gray-500'>
+            <h2 className={styles.subheader}>
               {CHARACTER_PAGE_LABELS.SUB_HEADER}
             </h2>
 

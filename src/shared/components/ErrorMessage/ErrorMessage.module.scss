@@ -1,0 +1,24 @@
+.error__wrapper {
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.error__message {
+  font-size: 14px;
+  color: var(--color-secondary);
+}
+
+.error__button {
+  width: 50%;
+  height: 40px;
+
+  border-radius: 6px;
+  background-color: var(--bg-accent);
+
+  box-shadow: var(--shadow-full);
+  cursor: pointer;
+}

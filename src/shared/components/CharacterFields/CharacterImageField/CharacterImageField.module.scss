@@ -1,0 +1,19 @@
+.character_image {
+  display: block;
+  object-fit: cover;
+}
+
+.character_image--card {
+  min-width: 240px;
+  min-height: 234px;
+  width: 240px;
+  height: 234px;
+  border-radius: 6px;
+}
+
+.character_image--profile {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 2px solid var(--border-primary);
+}

@@ -4,12 +4,14 @@ import { ToastContainer } from 'react-toastify';
 import { AppHeader, ErrorBoundary, Footer } from '@components';
 import { ErrorPage } from '@pages';
 
+import styles from './MainLayout.module.scss';
+
 export const MainLayout = () => {
   return (
-    <div className='min-h-screen flex flex-col bg-slate-50 w-screen'>
-      <AppHeader />
-      <main className='flex-1 w-full py-6.5 overflow-x-hidden'>
-        <div className='max-w-7xl mx-auto px-4'>
+    <div className={styles.layout__wrapper}>
+       <AppHeader />
+       <main className={styles.main__wrapper}>
+         <div className={styles.main__container}>
           <ErrorBoundary fallback={<ErrorPage />}>
             <Outlet />
           </ErrorBoundary>

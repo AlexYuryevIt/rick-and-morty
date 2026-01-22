@@ -1,0 +1,39 @@
+.character__page {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back__btn {
+  position: absolute;
+  top: 28px;
+  left: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.not__found_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  text-align: center;
+}
+
+.header {
+  font-size: 48px;
+  margin-bottom: 42px;
+  text-align: center;
+}
+
+.subheader {
+  margin-bottom: 24px;
+  text-align: center;
+  color: var(--color-secondary);
+}

@@ -1,0 +1,54 @@
+.character__card_wrapper {
+  position: relative;
+
+  width: 508px;
+  height: 248px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 6px;
+
+  border-radius: 6px;
+  background-color: var(--bg-secondary);
+  box-shadow: var(--shadow-full);
+}
+
+.character__card_wrapper:hover .edit__button {
+  opacity: 1;
+}
+
+.character__card_fields_wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.buttons__block {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  align-items: center;
+}
+
+.action__button,
+.edit__button {
+  width: 24px;
+  height: 24px;
+  color: var(--color-primary);
+}
+
+.edit__button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  opacity: 0;
+
+  transition: opacity 100ms ease-in-out;
+}

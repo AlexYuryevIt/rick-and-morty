@@ -2,14 +2,23 @@ import { useState } from 'react';
 
 import { HeaderLogo, Moon, Sun } from '@assets';
 import { ColorScheme, LABELS, ThemeLanguage } from '@constants';
+import { useTheme } from '@hooks';
 
 import { IconButton } from '../IconButton/IconButton';
 
-import type { TLang, TTheme } from './types';
+import styles from './Header.module.scss';
+
+import type { TLang } from './types';
 
 export const AppHeader = () => {
   const [lang, setLang] = useState<TLang>(ThemeLanguage.Ru);
-  const [theme, setTheme] = useState<TTheme>(ColorScheme.Light);
+
+  const { theme, toggleTheme } = useTheme();
+
+  const logoColor =
+    theme === ColorScheme.Light
+      ? 'var(--color-primary)'
+      : 'var(--color-secondary)';
 
   const handleChangeLanguage = () => {
     setLang((prev) =>
@@ -17,22 +26,22 @@ export const AppHeader = () => {
     );
   };
 
-  const handleChangeTheme = () => {
-    setTheme((prev) =>
-      prev === ColorScheme.Light ? ColorScheme.Dark : ColorScheme.Light
+  const currentLanguage =
+    lang === ThemeLanguage.Ru ? LABELS.RU_LANG : LABELS.EN_LANG;
+  const currentTheme =
+    theme === ColorScheme.Light ? (
+      <Sun color={logoColor} />
+    ) : (
+      <Moon color={logoColor} />
     );
-  };
-
-  const currentLanguage = lang === 'ru' ? LABELS.RU_LANG : LABELS.EN_LANG;
-  const currentTheme = theme === ColorScheme.Light ? <Sun /> : <Moon />;
 
   return (
-    <header className='w-screen h-15 bg-white shadow'>
-      <div className='max-w-7xl w-screen mx-auto px-4 flex items-center justify-between h-full'>
-        <HeaderLogo />
-        <div className='flex gap-4'>
+    <header className={styles.header__wrapper}>
+      <div className={styles.header__inner}>
+        <HeaderLogo color={logoColor} />
+        <div className={styles.header__btns}>
           <IconButton
-            onClick={handleChangeTheme}
+            onClick={toggleTheme}
             size='big'
           >
             {currentTheme}
@@ -41,7 +50,7 @@ export const AppHeader = () => {
             onClick={handleChangeLanguage}
             size='big'
           >
-            <p className='text-2xl text-gray-500'>{currentLanguage}</p>
+            <p className={styles.header__language_btn}>{currentLanguage}</p>
           </IconButton>
         </div>
       </div>

@@ -1,17 +1,19 @@
 import { CharacterField } from '@components';
 
+import styles from './CharacterFieldsList.module.scss';
+
 import type { TCharacterFieldProps } from './types';
 
 export const CharacterFieldsList = ({
   characterFields
 }: TCharacterFieldProps) => {
   return (
-    <div className='flex flex-col w-full'>
+    <div className={styles.list}>
       {characterFields.map((char) => (
         <CharacterField
           label={char.label}
           bordered
-          style='py-2.5'
+          style={styles.field}
           key={char.label}
         >
           {char.value}

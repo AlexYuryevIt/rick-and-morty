@@ -1,0 +1,33 @@
+.wrapper {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+}
+
+.not__found_img {
+  width: 540px;
+  height: 333px;
+  background-color: transparent;
+}
+
+.back__btn {
+  width: 240px;
+  height: 56px;
+
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.back__btn_text {
+  font-family: var(--font-karla);
+}

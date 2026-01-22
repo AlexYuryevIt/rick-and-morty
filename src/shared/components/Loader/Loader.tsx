@@ -1,5 +1,7 @@
 import { LoaderBig, LoaderSmall } from '@assets';
 
+import styles from './Loader.module.scss';
+
 type TLoaderProps = {
   size?: 'big' | 'small';
   text?: string;
@@ -14,9 +16,9 @@ export const Loader = ({
   }
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className={styles.loader__wrapper}>
       <LoaderBig />
-      <p className='text-2xl font-karla font-bold'>{text}</p>
+      <p className={styles.loader__text}>{text}</p>
     </div>
   );
 };

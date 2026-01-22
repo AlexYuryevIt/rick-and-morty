@@ -1,16 +1,18 @@
 import { LABELS } from '@constants';
 
+import styles from './ErrorMessage.module.scss';
+
 import type { TErrorMessage } from './types';
 
 export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
   return (
-    <div className='flex flex-col items-center gap-4 p-8'>
+    <div className={styles.error__wrapper}>
       <p>{message}</p>
       {refetch && (
         <button
           onClick={refetch}
           type='button'
-          className='bg-teal-500 rounded-md p-2 w-full shadow-xl cursor-pointer'
+          className={styles.error__button}
         >
           {LABELS.RETRY}
         </button>
@@ -19,7 +21,7 @@ export const ErrorMessage = ({ message, refetch, onGoBack }: TErrorMessage) => {
         <button
           onClick={onGoBack}
           type='button'
-          className='bg-teal-500 rounded-md p-2 w-full shadow-xl cursor-pointer'
+          className={styles.error__button}
         >
           {LABELS.GO_TO_MAIN_PAGE}
         </button>
