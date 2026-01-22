@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, type ReactNode } from 'react';
 
 import { Loader } from '../Loader/Loader';
 
+import styles from './InfiniteScroll.module.scss';
+
 type TInfiniteScrollProps = {
   children: ReactNode;
   hasNext?: boolean;
@@ -46,11 +48,11 @@ export const InfiniteScroll = ({
       {hasNext && (
         <div
           ref={sentinelRef}
-          className='h-1 invisible'
+          className={styles.ref__container}
         />
       )}
       {isLoading && (
-        <div className='flex justify-center py-8'>
+        <div className={styles.loader__container}>
           <Loader size='small' />
         </div>
       )}

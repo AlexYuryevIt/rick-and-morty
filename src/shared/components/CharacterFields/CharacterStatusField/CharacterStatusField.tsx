@@ -1,7 +1,9 @@
 import { Selector, StatusDot } from '@components';
 import { statusOptions } from '@constants';
 
-import { getCharacterStatus } from './utils/get-status';
+import { getCharacterStatus } from '../utils/get-status';
+
+import styles from './CharacterStatusField.module.scss';
 
 import type { Status } from '@types';
 
@@ -18,8 +20,8 @@ export const CharacterStatusField = ({
   isEditing,
   onSelect
 }: TCharacterStatusFieldProps) => (
-  <div>
-    <p>{label}</p>
+  <div className={styles.field__wrapper}>
+    <p className={styles.field__label}>{label}</p>
     {isEditing ? (
       <Selector
         options={statusOptions}
@@ -28,15 +30,15 @@ export const CharacterStatusField = ({
         onSelect={onSelect}
         clearButtonSize='small'
         OptionComponent={({ option }) => (
-          <div className='flex gap-1 items-center'>
+          <div className={styles.field__option}>
             <p>{option.label}</p>
             <StatusDot status={option.value} />
           </div>
         )}
       />
     ) : (
-      <div className='flex items-center gap-1'>
-        <p className='text-black/60 text-sm'>
+      <div className={styles.status__field}>
+        <p className={styles.status__text}>
           {getCharacterStatus(characterStatus)}
         </p>
         <StatusDot status={characterStatus} />

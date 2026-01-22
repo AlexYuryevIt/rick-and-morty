@@ -8,6 +8,8 @@ import { useGetCharacters } from '@hooks';
 import { useCharactersStore, useFiltersStore } from '@stores';
 import { CharacterCard, CharacterFilters } from '@widgets';
 
+import styles from './HomePage.module.scss';
+
 import type { TCharacter } from '@types';
 
 export const HomePage = () => {
@@ -49,7 +51,7 @@ export const HomePage = () => {
   }, [loadMore]);
 
   return (
-    <div className='flex flex-col justify-center items-center gap-4'>
+    <div className={styles.home__page}>
       <img
         src={banner}
         width={600}
@@ -73,20 +75,22 @@ export const HomePage = () => {
         </div>
       )}
 
-      <div className='flex flex-col gap-7 items-center'>
+      <div className={styles.list__wrapper}>
         <InfiniteScroll
           hasNext={hasNextPage}
           isLoading={isFetchingMore}
           loadMore={handleLoadMore}
         >
-          <div className='flex flex-wrap gap-7 items-center justify-center'>
-            {characters.map((char) => (
-              <CharacterCard
-                character={char}
-                key={char.id}
-                onSave={handleUpdateCharacter}
-              />
-            ))}
+          <div className={styles.list}>
+            {!isPending &&
+              characters &&
+              characters.map((char) => (
+                <CharacterCard
+                  character={char}
+                  key={char.id}
+                  onSave={handleUpdateCharacter}
+                />
+              ))}
           </div>
         </InfiniteScroll>
       </div>

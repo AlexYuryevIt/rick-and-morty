@@ -1,20 +1,14 @@
 import { classNames } from '@helpers';
 
-import type { TStatusDotProps } from './types';
+import styles from './StatusDot.module.scss';
 
-const colorByStatus = {
-  alive: 'bg-green-500',
-  dead: 'bg-red-500',
-  unknown: 'bg-orange-400'
-};
+import type { TStatusDotProps } from './types';
 
 export const StatusDot = ({ status }: TStatusDotProps) => (
   <span
     className={classNames(
-      'inline-block h-2.5 w-2.5 rounded-full',
-      status
-        ? colorByStatus[status.toLowerCase() as keyof typeof colorByStatus]
-        : ''
+      styles.status__dot,
+      styles[`status__dot--${status?.toLowerCase()}`]
     )}
   />
 );

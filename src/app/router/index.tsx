@@ -25,6 +25,6 @@ export const router = createBrowserRouter(
     }
   ],
   {
-    basename: '/rick-and-morty'
+    basename: '/rick-and-morty/'
   }
 );

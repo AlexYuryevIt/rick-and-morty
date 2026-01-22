@@ -1,0 +1,12 @@
+.loader__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader__text {
+  font-size: 24px;
+  font-family: var(--font-karla);
+  font-weight: bold;
+}

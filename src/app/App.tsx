@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router';
 
 import { router } from '@router';
 
-import './App.css';
+import './App.scss';
 
 const queryClient = new QueryClient();
 

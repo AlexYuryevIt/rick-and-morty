@@ -1,4 +1,4 @@
-export const truncateText = (text: string, maxLength = 30) => {
+export const truncateText = (text: string, maxLength = 25) => {
   if (!text) return;
 
   const trimmedText = text.trimEnd();
