@@ -1,0 +1,13 @@
+{
+  "enLang": "EN",
+  "backToMainPage": "Back to main page",
+  "retry": "Retry",
+  "labels": {
+    "gender": "Gender",
+    "status": "Status",
+    "species": "Species",
+    "origin": "Origin",
+    "type": "Type",
+    "location": "Location"
+  }
+}

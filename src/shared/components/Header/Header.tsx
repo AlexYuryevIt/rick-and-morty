@@ -1,33 +1,31 @@
-import { useState } from 'react';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 import { HeaderLogo, Moon, Sun } from '@assets';
-import { ColorScheme, LABELS, ThemeLanguage } from '@constants';
+import { ColorScheme, ThemeLanguage } from '@constants';
 import { useTheme } from '@hooks';
 
 import { IconButton } from '../IconButton/IconButton';
 
 import styles from './Header.module.scss';
 
-import type { TLang } from './types';
-
 export const AppHeader = () => {
-  const [lang, setLang] = useState<TLang>(ThemeLanguage.Ru);
-
+  const { t, i18n } = useTranslation(['common']);
   const { theme, toggleTheme } = useTheme();
+
+  const changeLanguage = () => {
+    i18next.changeLanguage(
+      i18n.language === ThemeLanguage.Ru ? ThemeLanguage.En : ThemeLanguage.Ru
+    );
+  };
 
   const logoColor =
     theme === ColorScheme.Light
       ? 'var(--color-primary)'
       : 'var(--color-secondary)';
 
-  const handleChangeLanguage = () => {
-    setLang((prev) =>
-      prev === ThemeLanguage.Ru ? ThemeLanguage.En : ThemeLanguage.Ru
-    );
-  };
-
   const currentLanguage =
-    lang === ThemeLanguage.Ru ? LABELS.RU_LANG : LABELS.EN_LANG;
+    i18n.language === ThemeLanguage.Ru ? t('ruLang') : t('enLang');
   const currentTheme =
     theme === ColorScheme.Light ? (
       <Sun color={logoColor} />
@@ -47,7 +45,7 @@ export const AppHeader = () => {
             {currentTheme}
           </IconButton>
           <IconButton
-            onClick={handleChangeLanguage}
+            onClick={changeLanguage}
             size='big'
           >
             <p className={styles.header__language_btn}>{currentLanguage}</p>

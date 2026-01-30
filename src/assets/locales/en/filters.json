@@ -1,0 +1,27 @@
+{
+  "name": "Filter by name...",
+  "species": {
+    "placeholder": "Species",
+    "alien": "Alien",
+    "animal": "Animal",
+    "human": "Human",
+    "humanoid": "Humanoid",
+    "robot": "Robot",
+    "cronenberg": "Cronenberg",
+    "disease": "Disease",
+    "unknown": "Unknown"
+  },
+  "gender": {
+    "placeholder": "Gender",
+    "female": "Female",
+    "male": "Male",
+    "genderless": "Genderless",
+    "unknown": "Unknown"
+  },
+  "status": {
+    "placeholder": "Status",
+    "alive": "Alive",
+    "dead": "Dead",
+    "unknown": "Unknown"
+  }
+}

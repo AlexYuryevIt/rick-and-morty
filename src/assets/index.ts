@@ -15,3 +15,6 @@ export { default as LoaderSmall } from './icons/loader-small.svg?react';
 export { default as Moon } from './icons/moon.svg?react';
 export { default as Search } from './icons/search.svg?react';
 export { default as Sun } from './icons/sun.svg?react';
+
+export { default as enLocales } from './locales/en';
+export { default as ruLocales } from './locales/ru';

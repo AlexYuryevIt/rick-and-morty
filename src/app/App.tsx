@@ -5,6 +5,8 @@ import { RouterProvider } from 'react-router';
 
 import { router } from '@router';
 
+import '../shared/services/i18n/config';
+
 import './App.scss';
 
 const queryClient = new QueryClient();

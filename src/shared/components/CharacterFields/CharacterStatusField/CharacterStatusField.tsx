@@ -24,7 +24,7 @@ export const CharacterStatusField = ({
     <p className={styles.field__label}>{label}</p>
     {isEditing ? (
       <Selector
-        options={statusOptions}
+        options={statusOptions()}
         size='small'
         value={characterStatus?.toLowerCase() as Status}
         onSelect={onSelect}

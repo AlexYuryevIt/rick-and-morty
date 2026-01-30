@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { banner } from '@assets';
 import { ErrorMessage, InfiniteScroll, Loader } from '@components';
-import { NOTIFICATION_TYPE, NOTIFICATIONS, UNEXPECTED_ERROR } from '@constants';
+import { NOTIFICATION_TYPE, UNEXPECTED_ERROR } from '@constants';
 import { notify } from '@helpers';
 import { useGetCharacters } from '@hooks';
 import { useCharactersStore, useFiltersStore } from '@stores';
@@ -14,6 +15,7 @@ import type { TCharacter } from '@types';
 
 export const HomePage = () => {
   const { resetFilters } = useFiltersStore();
+  const { t } = useTranslation(['common', 'notifications']);
 
   const {
     errorMessage,
@@ -42,7 +44,7 @@ export const HomePage = () => {
     updateCharacter(character);
 
     if (!isError) {
-      notify(NOTIFICATIONS.characterUpdated, NOTIFICATION_TYPE.success);
+      notify(t('characterUpdated'), NOTIFICATION_TYPE.success);
     }
   };
 
