@@ -15,7 +15,7 @@ import { CharacterFieldsList } from './ui/CharacterFieldsList';
 export const CharacterPage = () => {
   const navigate = useNavigate();
   const { id: characterId } = useParams();
-  const { t } = useTranslation(['common', 'character']);
+  const { t } = useTranslation(['common', 'character', 'errors']);
 
   const { isLoading, isError, errorMessage } = useGetCharacter(
     Number(characterId)
@@ -25,9 +25,9 @@ export const CharacterPage = () => {
 
   useEffect(() => {
     if (isError && errorMessage) {
-      notify(errorMessage, NOTIFICATION_TYPE.error);
+      notify(t(`errors:api.${errorMessage}`), NOTIFICATION_TYPE.error);
     }
-  }, [isError, errorMessage]);
+  }, [isError, errorMessage, t]);
 
   const characterFields = useMemo(
     () => [
@@ -68,8 +68,6 @@ export const CharacterPage = () => {
             {t('character:characterNotFound')}
           </div>
         )}
-
-        {isError && errorMessage}
 
         {character && (
           <>

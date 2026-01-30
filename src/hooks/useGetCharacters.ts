@@ -3,13 +3,7 @@ import { isAxiosError } from 'axios';
 import { useEffect, useMemo } from 'react';
 
 import { getCharacters } from '@api';
-import {
-  gcTime,
-  initialPage,
-  pageStep,
-  staleTime,
-  UNEXPECTED_ERROR
-} from '@constants';
+import { gcTime, initialPage, pageStep, staleTime } from '@constants';
 import { getErrorMessage } from '@helpers';
 import { useCharactersStore, useFiltersStore } from '@stores';
 
@@ -84,7 +78,7 @@ export const useGetCharacters = (): TUseGetCharactersProps => {
 
   const errorMessage = useMemo(() => {
     if (!error) return null;
-    return isAxiosError(error) ? getErrorMessage(error) : UNEXPECTED_ERROR;
+    return isAxiosError(error) ? getErrorMessage(error) : '';
   }, [error]);
 
   return {

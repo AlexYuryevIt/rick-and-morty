@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { banner } from '@assets';
 import { ErrorMessage, InfiniteScroll, Loader } from '@components';
-import { NOTIFICATION_TYPE, UNEXPECTED_ERROR } from '@constants';
+import { NOTIFICATION_TYPE } from '@constants';
 import { notify } from '@helpers';
 import { useGetCharacters } from '@hooks';
 import { useCharactersStore, useFiltersStore } from '@stores';
@@ -15,7 +15,7 @@ import type { TCharacter } from '@types';
 
 export const HomePage = () => {
   const { resetFilters } = useFiltersStore();
-  const { t } = useTranslation(['common', 'notifications']);
+  const { t } = useTranslation(['notifications', 'errors']);
 
   const {
     errorMessage,
@@ -32,9 +32,9 @@ export const HomePage = () => {
 
   useEffect(() => {
     if (isError && errorMessage) {
-      notify(errorMessage, NOTIFICATION_TYPE.error);
+      notify(t(`errors:api.${errorMessage}`), NOTIFICATION_TYPE.error);
     }
-  }, [isError, errorMessage]);
+  }, [isError, errorMessage, t]);
 
   const handleGoBack = () => {
     resetFilters();
@@ -65,7 +65,7 @@ export const HomePage = () => {
 
       {isError && (
         <ErrorMessage
-          message={errorMessage ?? UNEXPECTED_ERROR}
+          message={errorMessage ?? ''}
           refetch={refetch}
           onGoBack={handleGoBack}
         />
