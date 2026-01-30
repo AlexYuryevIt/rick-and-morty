@@ -1,4 +1,4 @@
-import { classNames } from '@helpers';
+import styles from './CharacterImageField.module.scss';
 
 type CharacterImageVariant = 'card' | 'profile';
 
@@ -10,21 +10,23 @@ type CharacterImageProps = {
 };
 
 const variantClasses: Record<CharacterImageVariant, string> = {
-  card: 'min-w-60 min-h-58.5 w-60 h-58.5 rounded-md',
-  profile: 'rounded-full w-75 h-75 border-2 border-gray-300'
+  card: styles['character_image--card'],
+  profile: styles['character_image--profile']
 };
 
 export const CharacterImageField = ({
   src,
   alt,
   variant = 'card',
-  className
+  className = ''
 }: CharacterImageProps) => {
+  const baseClass = `${styles.character_image} ${variantClasses[variant]} ${className}`;
+
   return (
     <img
       src={src}
-      alt={alt}
-      className={classNames(variantClasses[variant], className)}
+      alt={alt || ''}
+      className={baseClass}
     />
   );
 };

@@ -1,0 +1,31 @@
+.icon_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon_button--plain {
+  composes: icon_button;
+}
+
+.icon_button--bordered {
+  composes: icon_button;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+}
+
+.icon_button--auto {
+  width: auto;
+  height: auto;
+}
+
+.icon_button--small {
+  width: 8px;
+  height: 8px;
+}
+
+.icon_button--big {
+  width: 38px;
+  height: 38px;
+}

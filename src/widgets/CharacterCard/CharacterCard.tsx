@@ -11,6 +11,8 @@ import {
 import { CHARACTER_FIELDS_LABELS, ROUTES } from '@constants';
 import { type Status, type TCharacter } from '@types';
 
+import styles from './CharacterCard.module.scss';
+
 import type { TCharacterCardProps } from './types';
 
 export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
@@ -50,14 +52,13 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
   };
 
   return (
-    <div className='relative flex gap-3 p-1.5 rounded-md shadow w-127 max-h-62 items-start group'>
+    <div className={styles.character__card_wrapper}>
       <CharacterImageField
         src={character?.image}
         alt={character?.name}
         variant='card'
       />
-
-      <div className='w-full flex flex-col gap-2'>
+      <div className={styles.character__card_fields_wrapper}>
         <CharacterNameField
           name={isEditing ? editedCharacter.name : character.name}
           characterLink={ROUTES.CHARACTER_PAGE(character.id)}
@@ -87,18 +88,18 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
       </div>
 
       {isEditing ? (
-        <div className='absolute top-2 right-2 flex items-center'>
+        <div className={styles.buttons__block}>
           <IconButton
             variant='plain'
             onClick={handleCancelEdit}
-            className='w-6 h-6'
+            className={styles.action__button}
           >
             <Close />
           </IconButton>
           <IconButton
             variant='plain'
             onClick={handleConfirmEdit}
-            className='w-6 h-6'
+            className={styles.action__button}
           >
             <Checkmark />
           </IconButton>
@@ -107,7 +108,7 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
         <IconButton
           onClick={handleEditCard}
           variant='plain'
-          className='absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-100'
+          className={styles.edit__button}
         >
           <Edit />
         </IconButton>

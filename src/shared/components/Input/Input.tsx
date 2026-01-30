@@ -4,16 +4,21 @@ import { Close } from '@assets';
 import { IconButton } from '@components';
 import { classNames } from '@helpers';
 
-import { inputSizes } from './InputStyles';
+import styles from './Input.module.scss';
 
 import type { TInputProps } from './types';
+
+const inputSizeClasses = {
+  small: styles.inputSmall,
+  big: styles.inputBig
+} as const;
 
 export const Input = ({
   value,
   placeholder,
   size = 'small',
   icon,
-  styles,
+  styles: customStyles,
   onChange,
   onClear
 }: TInputProps) => {
@@ -22,27 +27,28 @@ export const Input = ({
   };
 
   return (
-    <div className='relative'>
+    <div className={styles.inputContainer}>
       <input
         value={value}
         placeholder={placeholder}
         className={classNames(
-          inputSizes[size],
-          icon && 'pl-10',
-          value && onClear && 'pr-10',
-          'outline-0 placeholder:text-gray-500',
-          styles
+          styles.input,
+          inputSizeClasses[size],
+          icon && styles.hasIcon,
+          value && onClear && styles.hasClearButton,
+          customStyles
         )}
         onChange={onChange}
         type='text'
         id={useId()}
       />
+
       {value && onClear && (
         <IconButton
           variant='plain'
           size='small'
           onClick={handleClearValue}
-          className='absolute top-[50%] translate-y-[-50%] right-4'
+          className={styles.clearButton}
         >
           <Close
             width={'16px'}
@@ -50,11 +56,8 @@ export const Input = ({
           />
         </IconButton>
       )}
-      {icon && (
-        <div className='absolute top-[50%] translate-y-[-50%] left-4'>
-          {icon}
-        </div>
-      )}
+
+      {icon && <div className={styles.iconWrapper}>{icon}</div>}
     </div>
   );
 };

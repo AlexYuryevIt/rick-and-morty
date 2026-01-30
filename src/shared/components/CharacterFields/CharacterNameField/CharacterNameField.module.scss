@@ -1,0 +1,50 @@
+.name_field__wrapper {
+  position: relative;
+
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name_field__link {
+  width: 100%;
+  cursor: pointer;
+}
+
+.name_field__text {
+  composes: name_field__link;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name_field__tooltip {
+  position: absolute;
+  left: 0;
+  top: 100%;
+
+  max-width: 320px;
+
+  margin-top: 4px;
+  padding: 8px 16px;
+
+  border-radius: 4px;
+
+  background-color: var(--bg-secondary);
+
+  color: var(--color-primary);
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  white-space: pre-wrap;
+
+  transition: all 200ms ease-in-out;
+  box-shadow: var(--shadow-full);
+  z-index: 50;
+}
+
+.name_field__wrapper:hover .name_field__tooltip {
+  opacity: 1;
+  visibility: visible;
+}

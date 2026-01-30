@@ -1,11 +1,11 @@
 import { classNames } from '@helpers';
 
-import { defaultButtonSizes, defaultButtonStyles } from './IconButtonStyles';
+import styles from './IconButton.module.scss';
 
 import type { ReactNode } from 'react';
 
 type TIconButtonProps = {
-  children: ReactNode | 'string';
+  children: ReactNode | string;
   size?: 'auto' | 'small' | 'big';
   variant?: 'plain' | 'bordered';
   className?: string;
@@ -19,11 +19,15 @@ export const IconButton = ({
   className,
   onClick
 }: TIconButtonProps) => {
+  const sizeClass = `icon_button--${size}`;
+  const variantClass = `icon_button--${variant}`;
+
   return (
     <button
       className={classNames(
-        defaultButtonStyles[variant],
-        defaultButtonSizes[size],
+        styles.icon_button,
+        styles[variantClass],
+        styles[sizeClass],
         className
       )}
       onClick={onClick}

@@ -3,19 +3,21 @@ import { Link } from 'react-router';
 import { NotFound } from '@assets';
 import { LABELS, ROUTES } from '@constants';
 
+import styles from './NotFoundPage.module.scss';
+
 export const NotFoundPage = () => {
   return (
-    <div className='flex min-h-screen flex-col justify-center items-center gap-17.5'>
+    <div className={styles.wrapper}>
       <img
         src={NotFound}
         alt='not found page'
-        className='w-135 h-83.25 bg-transparent'
+        className={styles.not__found_img}
       />
       <Link
         to={ROUTES.MAIN}
-        className='flex justify-center items-center w-60 h-14 border border-black/35 rounded-lg cursor-pointer'
+        className={styles.back__btn}
       >
-        <p className='font-karla'>{LABELS.GO_TO_MAIN_PAGE}</p>
+        <p className={styles.back__btn_text}>{LABELS.GO_TO_MAIN_PAGE}</p>
       </Link>
     </div>
   );

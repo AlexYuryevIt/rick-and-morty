@@ -11,6 +11,8 @@ import {
 import { useDebounce } from '@hooks';
 import { useFiltersStore } from '@stores';
 
+import styles from './CharacterFilters.module.scss';
+
 export const CharacterFilters = () => {
   const { filters, setFilter } = useFiltersStore();
 
@@ -38,13 +40,7 @@ export const CharacterFilters = () => {
   };
 
   return (
-    <div
-      className='
-      grid gap-4
-      grid-cols-2
-      lg:flex lg:items-center lg:justify-between lg:gap-7
-      '
-    >
+    <div className={styles.filters}>
       <Input
         onChange={handleSetName}
         onClear={handleClearName}
