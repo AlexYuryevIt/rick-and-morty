@@ -1,0 +1,18 @@
+{
+  "ui": {
+    "unexpected": "Morty, damn it, what did you do? The portal-gun is malfunctioning, and we're stuck in the error dimension."
+  },
+  "api": {
+    "400": "🪐 Incorrect portal coordinates. Please check the parameters!",
+    "401": "🚀 Access denied. An authorization portal key is required.",
+    "403": "🔒 You do not have a pass to this galaxy.",
+    "404": "🌌 The page is lost in the galaxy. Characters not found 😔",
+    "408": "⏰ Interstellar jump timeout. The server is not responding.",
+    "429": "⚡ The portal is overloaded! Too many requests, please wait.",
+    "500": "💥 A multiverse server explosion occurred. Please try again later.",
+    "502": "🛰️ The gateway is damaged. The server is not reachable.",
+    "503": "🔧 The galactic service is under maintenance.",
+    "504": "🌠 Hyperjump timeout. The gateway is not responding.",
+    "unexpectedError": "Cosmic anomaly 💫"
+  }
+}

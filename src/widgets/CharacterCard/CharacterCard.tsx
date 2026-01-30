@@ -9,7 +9,7 @@ import {
   CharacterStatusField,
   IconButton
 } from '@components';
-import { CHARACTER_FIELDS_LABELS, ROUTES } from '@constants';
+import { ROUTES } from '@constants';
 import { type Status, type TCharacter } from '@types';
 
 import styles from './CharacterCard.module.scss';

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 
 import { ArrowLeft } from '@assets';
 import { CharacterImageField, IconButton, Loader } from '@components';
-import { CHARACTER_PAGE_LABELS, NOTIFICATION_TYPE } from '@constants';
+import { NOTIFICATION_TYPE } from '@constants';
 import { notify } from '@helpers';
 import { useGetCharacter } from '@hooks';
 import { useCharacterStore } from '@stores';
