@@ -2,7 +2,7 @@ import { i18n } from '@services';
 
 import type { TGenderOptions, TSpeciesOptions, TStatusOptions } from '@types';
 
-export const speciesOptions = (): TSpeciesOptions[] => [
+export const getSpeciesOptions = (): TSpeciesOptions[] => [
   { value: 'alien', label: i18n.t('filters:species.alien') },
   { value: 'animal', label: i18n.t('filters:species.animal') },
   { value: 'human', label: i18n.t('filters:species.human') },
@@ -13,13 +13,13 @@ export const speciesOptions = (): TSpeciesOptions[] => [
   { value: 'unknown', label: i18n.t('filters:species.unknown') }
 ];
 
-export const statusOptions = (): TStatusOptions[] => [
+export const getStatusOptions = (): TStatusOptions[] => [
   { value: 'alive', label: i18n.t('filters:status.alive') },
   { value: 'dead', label: i18n.t('filters:status.dead') },
   { value: 'unknown', label: i18n.t('filters:status.unknown') }
 ];
 
-export const genderOptions = (): TGenderOptions[] => [
+export const getGenderOptions = (): TGenderOptions[] => [
   { value: 'female', label: i18n.t('filters:gender.female') },
   { value: 'male', label: i18n.t('filters:gender.male') },
   { value: 'genderless', label: i18n.t('filters:gender.genderless') },

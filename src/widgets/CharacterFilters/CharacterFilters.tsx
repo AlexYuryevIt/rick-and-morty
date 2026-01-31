@@ -3,7 +3,11 @@ import { useTranslation } from 'react-i18next';
 
 import { Search } from '@assets';
 import { Input, Selector } from '@components';
-import { genderOptions, speciesOptions, statusOptions } from '@constants';
+import {
+  getStatusOptions,
+  getGenderOptions,
+  getSpeciesOptions
+} from '@constants';
 import { useDebounce } from '@hooks';
 import { useFiltersStore } from '@stores';
 
@@ -47,19 +51,19 @@ export const CharacterFilters = () => {
         placeholder={t('name')}
       />
       <Selector
-        options={speciesOptions()}
+        options={getSpeciesOptions()}
         value={filters.species}
         placeholder={t('species.placeholder')}
         onSelect={(value) => setFilter(value, 'species')}
       />
       <Selector
-        options={genderOptions()}
+        options={getGenderOptions()}
         value={filters.gender}
         placeholder={t('gender.placeholder')}
         onSelect={(value) => setFilter(value, 'gender')}
       />
       <Selector
-        options={statusOptions()}
+        options={getStatusOptions()}
         value={filters.status}
         placeholder={t('status.placeholder')}
         onSelect={(value) => setFilter(value, 'status')}
