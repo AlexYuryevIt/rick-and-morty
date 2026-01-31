@@ -1,5 +1,5 @@
 import { Selector, StatusDot } from '@components';
-import { statusOptions } from '@constants';
+import { getStatusOptions } from '@constants';
 
 import { getCharacterStatus } from '../utils/get-status';
 
@@ -24,7 +24,7 @@ export const CharacterStatusField = ({
     <p className={styles.field__label}>{label}</p>
     {isEditing ? (
       <Selector
-        options={statusOptions}
+        options={getStatusOptions()}
         size='small'
         value={characterStatus?.toLowerCase() as Status}
         onSelect={onSelect}

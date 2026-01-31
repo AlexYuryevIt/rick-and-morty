@@ -1,4 +1,5 @@
 import { useEffect, useState, type ChangeEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Checkmark, Close, Edit } from '@assets';
 import {
@@ -8,7 +9,7 @@ import {
   CharacterStatusField,
   IconButton
 } from '@components';
-import { CHARACTER_FIELDS_LABELS, ROUTES } from '@constants';
+import { ROUTES } from '@constants';
 import { type Status, type TCharacter } from '@types';
 
 import styles from './CharacterCard.module.scss';
@@ -16,6 +17,7 @@ import styles from './CharacterCard.module.scss';
 import type { TCharacterCardProps } from './types';
 
 export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
+  const { t } = useTranslation('common');
   const [isEditing, setIsEditing] = useState(false);
   const [editedCharacter, setEditedCharacter] = useState<TCharacter>(character);
 
@@ -67,18 +69,18 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
           onClear={handleClearName}
         />
 
-        <CharacterField label={CHARACTER_FIELDS_LABELS.GENDER}>
+        <CharacterField label={t('labels.gender')}>
           {character.gender}
         </CharacterField>
-        <CharacterField label={CHARACTER_FIELDS_LABELS.SPECIES}>
+        <CharacterField label={t('labels.species')}>
           {character.species}
         </CharacterField>
-        <CharacterField label={CHARACTER_FIELDS_LABELS.LOCATION}>
+        <CharacterField label={t('labels.location')}>
           {character.location.name}
         </CharacterField>
 
         <CharacterStatusField
-          label={CHARACTER_FIELDS_LABELS.STATUS}
+          label={t('labels.status')}
           characterStatus={
             isEditing ? editedCharacter.status : character.status
           }

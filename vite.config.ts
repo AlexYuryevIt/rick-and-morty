@@ -44,6 +44,10 @@ export default defineConfig({
       {
         find: '@helpers',
         replacement: path.resolve(__dirname, 'src/shared/helpers')
+      },
+      {
+        find: '@services',
+        replacement: path.resolve(__dirname, 'src/shared/services')
       }
     ]
   }

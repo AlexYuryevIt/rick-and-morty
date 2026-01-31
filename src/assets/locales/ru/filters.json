@@ -1,0 +1,27 @@
+{
+  "name": "По имени...",
+  "species": {
+    "placeholder": "Вид",
+    "alien": "Пришелец",
+    "animal": "Животное",
+    "human": "Человек",
+    "humanoid": "Человекообразный",
+    "robot": "Робот",
+    "cronenberg": "Кроненберг",
+    "disease": "Болезнь",
+    "unknown": "Неизвестно"
+  },
+  "gender": {
+    "placeholder": "Пол",
+    "female": "Женский",
+    "male": "Мужской",
+    "genderless": "Без пола",
+    "unknown": "Неизвестно"
+  },
+  "status": {
+    "placeholder": "Статус",
+    "alive": "Жив",
+    "dead": "Мертв",
+    "unknown": "Неизвестно"
+  }
+}

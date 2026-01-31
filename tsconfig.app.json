@@ -39,7 +39,8 @@
       "@components": ["src/shared/components"],
       "@constants": ["src/shared/constants"],
       "@types": ["src/shared/types"],
-      "@helpers": ["src/shared/helpers"]
+      "@helpers": ["src/shared/helpers"],
+      "@services": ["src/shared/services"]
     }
   },
   "include": ["src", "**/*.test.ts", "**/*.test.tsx"]

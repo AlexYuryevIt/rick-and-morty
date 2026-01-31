@@ -1,11 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import { NotFound } from '@assets';
-import { LABELS, ROUTES } from '@constants';
+import { ROUTES } from '@constants';
 
 import styles from './NotFoundPage.module.scss';
 
 export const NotFoundPage = () => {
+  const { t } = useTranslation('common');
   return (
     <div className={styles.wrapper}>
       <img
@@ -17,7 +19,7 @@ export const NotFoundPage = () => {
         to={ROUTES.MAIN}
         className={styles.back__btn}
       >
-        <p className={styles.back__btn_text}>{LABELS.GO_TO_MAIN_PAGE}</p>
+        <p className={styles.back__btn_text}>{t('backToMainPage')}</p>
       </Link>
     </div>
   );

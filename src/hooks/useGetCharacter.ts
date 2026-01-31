@@ -3,7 +3,7 @@ import { isAxiosError } from 'axios';
 import { useEffect } from 'react';
 
 import { getCharacter } from '@api';
-import { staleTime, UNEXPECTED_ERROR } from '@constants';
+import { staleTime } from '@constants';
 import { getErrorMessage } from '@helpers';
 import { useCharacterStore } from '@stores';
 
@@ -24,9 +24,7 @@ export const useGetCharacter = (characterId: number) => {
     setCharacter(data);
   }, [data, error, setCharacter]);
 
-  const errorMessage = isAxiosError(error)
-    ? getErrorMessage(error)
-    : UNEXPECTED_ERROR;
+  const errorMessage = isAxiosError(error) ? getErrorMessage(error) : '';
 
   return {
     isLoading: isPending,

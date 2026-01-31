@@ -1,13 +1,10 @@
 import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 
 import { ArrowLeft } from '@assets';
 import { CharacterImageField, IconButton, Loader } from '@components';
-import {
-  CHARACTER_FIELDS_LABELS,
-  CHARACTER_PAGE_LABELS,
-  NOTIFICATION_TYPE
-} from '@constants';
+import { NOTIFICATION_TYPE } from '@constants';
 import { notify } from '@helpers';
 import { useGetCharacter } from '@hooks';
 import { useCharacterStore } from '@stores';
@@ -18,6 +15,7 @@ import { CharacterFieldsList } from './ui/CharacterFieldsList';
 export const CharacterPage = () => {
   const navigate = useNavigate();
   const { id: characterId } = useParams();
+  const { t } = useTranslation(['common', 'character', 'errors']);
 
   const { isLoading, isError, errorMessage } = useGetCharacter(
     Number(characterId)
@@ -27,26 +25,26 @@ export const CharacterPage = () => {
 
   useEffect(() => {
     if (isError && errorMessage) {
-      notify(errorMessage, NOTIFICATION_TYPE.error);
+      notify(t(`errors:api.${errorMessage}`), NOTIFICATION_TYPE.error);
     }
-  }, [isError, errorMessage]);
+  }, [isError, errorMessage, t]);
 
   const characterFields = useMemo(
     () => [
-      { label: CHARACTER_FIELDS_LABELS.GENDER, value: character?.gender },
-      { label: CHARACTER_FIELDS_LABELS.STATUS, value: character?.status },
-      { label: CHARACTER_FIELDS_LABELS.SPECIES, value: character?.species },
-      { label: CHARACTER_FIELDS_LABELS.ORIGIN, value: character?.origin?.name },
+      { label: t('labels.gender'), value: character?.gender },
+      { label: t('labels.status'), value: character?.status },
+      { label: t('labels.species'), value: character?.species },
+      { label: t('labels.origin'), value: character?.origin?.name },
       {
-        label: CHARACTER_FIELDS_LABELS.TYPE,
+        label: t('labels.type'),
         value: character?.type || 'Unknown'
       },
       {
-        label: CHARACTER_FIELDS_LABELS.LOCATION,
+        label: t('labels.location'),
         value: character?.location?.name
       }
     ],
-    [character]
+    [character, t]
   );
 
   const handleGoBack = () => navigate(-1);
@@ -59,7 +57,7 @@ export const CharacterPage = () => {
         className={styles.back__btn}
       >
         <ArrowLeft />
-        <p>{CHARACTER_PAGE_LABELS.GO_BACK_BUTTON}</p>
+        <p>{t('character:goBack')}</p>
       </IconButton>
 
       <div>
@@ -67,11 +65,9 @@ export const CharacterPage = () => {
 
         {!character && !isLoading && (
           <div className={styles.not__found_text}>
-            {CHARACTER_PAGE_LABELS.CHARACTER_NOT_FOUND}
+            {t('character:characterNotFound')}
           </div>
         )}
-
-        {isError && errorMessage}
 
         {character && (
           <>
@@ -83,9 +79,7 @@ export const CharacterPage = () => {
 
             <h1 className={styles.header}>{character?.name}</h1>
 
-            <h2 className={styles.subheader}>
-              {CHARACTER_PAGE_LABELS.SUB_HEADER}
-            </h2>
+            <h2 className={styles.subheader}>{t('character:infoLabel')}</h2>
 
             <CharacterFieldsList characterFields={characterFields} />
           </>

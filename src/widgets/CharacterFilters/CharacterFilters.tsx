@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Search } from '@assets';
 import { Input, Selector } from '@components';
 import {
-  CHARACTER_FIELDS_LABELS,
-  genderOptions,
-  speciesOptions,
-  statusOptions
+  getStatusOptions,
+  getGenderOptions,
+  getSpeciesOptions
 } from '@constants';
 import { useDebounce } from '@hooks';
 import { useFiltersStore } from '@stores';
@@ -15,6 +15,7 @@ import styles from './CharacterFilters.module.scss';
 
 export const CharacterFilters = () => {
   const { filters, setFilter } = useFiltersStore();
+  const { t } = useTranslation('filters');
 
   const [name, setName] = useState(filters.name);
   const debouncedName = useDebounce(name);
@@ -47,24 +48,24 @@ export const CharacterFilters = () => {
         value={name}
         icon={<Search />}
         size='big'
-        placeholder='Filter by name...'
+        placeholder={t('name')}
       />
       <Selector
-        options={speciesOptions}
+        options={getSpeciesOptions()}
         value={filters.species}
-        placeholder={CHARACTER_FIELDS_LABELS.SPECIES}
+        placeholder={t('species.placeholder')}
         onSelect={(value) => setFilter(value, 'species')}
       />
       <Selector
-        options={genderOptions}
+        options={getGenderOptions()}
         value={filters.gender}
-        placeholder={CHARACTER_FIELDS_LABELS.GENDER}
+        placeholder={t('gender.placeholder')}
         onSelect={(value) => setFilter(value, 'gender')}
       />
       <Selector
-        options={statusOptions}
+        options={getStatusOptions()}
         value={filters.status}
-        placeholder={CHARACTER_FIELDS_LABELS.STATUS}
+        placeholder={t('status.placeholder')}
         onSelect={(value) => setFilter(value, 'status')}
       />
     </div>
