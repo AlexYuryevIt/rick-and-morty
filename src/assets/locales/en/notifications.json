@@ -1,3 +1,6 @@
 {
-  "characterUpdated": "Character updated successfully"
+  "characterUpdated": "Character updated successfully",
+  "addedToFavourites": "Character added to favourites",
+  "removedFromFavourites": "Character removed from favourites",
+  "notFound": "Character not found"
 }

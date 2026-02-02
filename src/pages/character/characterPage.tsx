@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 import { ArrowLeft } from '@assets';
-import { CharacterImageField, IconButton, Loader } from '@components';
+import { CharacterImageField, Loader } from '@components';
 import { NOTIFICATION_TYPE } from '@constants';
 import { notify } from '@helpers';
 import { useGetCharacter } from '@hooks';
@@ -13,7 +13,6 @@ import styles from './CharacterPage.module.scss';
 import { CharacterFieldsList } from './ui/CharacterFieldsList';
 
 export const CharacterPage = () => {
-  const navigate = useNavigate();
   const { id: characterId } = useParams();
   const { t } = useTranslation(['common', 'character', 'errors']);
 
@@ -47,18 +46,15 @@ export const CharacterPage = () => {
     [character, t]
   );
 
-  const handleGoBack = () => navigate(-1);
-
   return (
     <div className={styles.character__page}>
-      <IconButton
-        variant='plain'
-        onClick={handleGoBack}
+      <Link
+        to='/'
         className={styles.back__btn}
       >
         <ArrowLeft />
         <p>{t('character:goBack')}</p>
-      </IconButton>
+      </Link>
 
       <div>
         {isLoading && <Loader />}

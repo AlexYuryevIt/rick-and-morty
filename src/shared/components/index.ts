@@ -12,3 +12,4 @@ export * from './Input/Input';
 export * from './Loader/Loader';
 export * from './Selector/Selector';
 export * from './StatusDot/StatusDot';
+export * from './Badge/Badge';

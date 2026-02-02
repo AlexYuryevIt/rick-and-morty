@@ -13,7 +13,7 @@
 
 ## Стэк:
 
-React, Typescript, React Router, Tailwind.
+React, Typescript, React Router, Tanstack Query, Zustand, Jest + RTL, Playwright, SCSS.
 
 ## Проект доступен по ссылке - [https://alexyuryevit.github.io/rick-and-morty/]
 

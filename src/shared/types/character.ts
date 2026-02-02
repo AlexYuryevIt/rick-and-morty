@@ -5,6 +5,11 @@ type TLocation = {
   url: string;
 };
 
+export type TFavouriteCharacter = {
+  name: string;
+  id: string | number;
+};
+
 export type TCharacter = {
   id: string;
   name: string;

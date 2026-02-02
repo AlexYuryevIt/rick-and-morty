@@ -1,3 +1,6 @@
 {
-  "characterUpdated": "Персонаж успешно обновлен"
+  "characterUpdated": "Персонаж успешно обновлен",
+  "addedToFavourites": "Персонаж добавлен в избранное",
+  "removedFromFavourites": "Персонаж удален из избранного",
+  "notFound": "Персонаж не найден"
 }
