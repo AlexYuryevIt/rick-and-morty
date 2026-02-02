@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import { Close } from '@assets';
@@ -12,6 +13,7 @@ export const FavouritesList = ({
   favourites,
   onDelete
 }: TFavouritesListProps) => {
+  const { t } = useTranslation('errors');
   return (
     <div className={styles.favourites__list}>
       {favourites.length > 0 &&
@@ -35,7 +37,7 @@ export const FavouritesList = ({
             </IconButton>
           </div>
         ))}
-      {favourites.length === 0 && <div>No favourites yet</div>}
+      {favourites.length === 0 && <div>{t('ui.noFavourites')}</div>}
     </div>
   );
 };

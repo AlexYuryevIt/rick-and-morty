@@ -6,6 +6,10 @@
   top: 45px;
 
   width: 240px;
+  max-height: 240px;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
 
   border: 1px solid var(--color-primary);
   border-radius: 6px;

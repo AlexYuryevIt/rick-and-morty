@@ -1,9 +1,10 @@
 import i18next from 'i18next';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 
 import { HeaderLogo, Moon, Star, Sun } from '@assets';
-import { ColorScheme, ThemeLanguage } from '@constants';
+import { ColorScheme, ROUTES, ThemeLanguage } from '@constants';
 import { useTheme } from '@hooks';
 import { useCharactersStore } from '@stores';
 
@@ -18,6 +19,9 @@ export const AppHeader = () => {
   const { theme, toggleTheme } = useTheme();
   const { favourites, setFavourites } = useCharactersStore();
   const [showFavourites, setShowFavourites] = useState(false);
+  const location = useLocation();
+
+  const isHomePath = location.pathname === ROUTES.MAIN;
 
   const changeLanguage = () => {
     i18next.changeLanguage(
@@ -52,25 +56,29 @@ export const AppHeader = () => {
       <div className={styles.header__inner}>
         <HeaderLogo color={logoColor} />
         <div className={styles.header__btns}>
-          <div className={styles.favourites}>
-            <div className={styles.favoutires__btn}>
-              <IconButton
-                onClick={handleShowFavourites}
-                size='big'
-              >
-                <span className={styles.favourites__button}>
-                  <Star color={'var(--color-accent)'} />
-                  {favourites.length > 0 && <Badge count={favourites.length} />}
-                </span>
-              </IconButton>
+          {isHomePath && (
+            <div className={styles.favourites}>
+              <div className={styles.favoutires__btn}>
+                <IconButton
+                  onClick={handleShowFavourites}
+                  size='big'
+                >
+                  <span className={styles.favourites__button}>
+                    <Star color={'var(--color-accent)'} />
+                    {favourites.length > 0 && (
+                      <Badge count={favourites.length} />
+                    )}
+                  </span>
+                </IconButton>
+              </div>
+              {showFavourites && (
+                <FavouritesList
+                  favourites={favourites}
+                  onDelete={handleRemoveFavourite}
+                />
+              )}
             </div>
-            {showFavourites && (
-              <FavouritesList
-                favourites={favourites}
-                onDelete={handleRemoveFavourite}
-              />
-            )}
-          </div>
+          )}
 
           <IconButton
             onClick={toggleTheme}
