@@ -3,11 +3,11 @@ import { Link } from 'react-router';
 
 import { Close } from '@assets';
 
-import { IconButton } from '../../../IconButton/IconButton';
+import { IconButton } from '../../../../shared/components/IconButton/IconButton';
 
 import styles from './FavouritesList.module.scss';
 
-import type { TFavouritesListProps } from './types';
+import type { TFavouritesListProps } from '../../types';
 
 export const FavouritesList = ({
   favourites,

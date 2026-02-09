@@ -63,6 +63,7 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
         ...favourites,
         { id: editedCharacter.id, name: editedCharacter.name }
       ]);
+
       return notify(
         t('notifications:addedToFavourites'),
         NOTIFICATION_TYPE.success
