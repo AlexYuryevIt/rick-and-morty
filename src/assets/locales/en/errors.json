@@ -1,6 +1,7 @@
 {
   "ui": {
-    "unexpected": "Morty, damn it, what did you do? The portal-gun is malfunctioning, and we're stuck in the error dimension."
+    "unexpected": "Morty, damn it, what did you do? The portal-gun is malfunctioning, and we're stuck in the error dimension.",
+    "noFavourites": "No favourite characters."
   },
   "api": {
     "400": "🪐 Incorrect portal coordinates. Please check the parameters!",

@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Checkmark, Close, Edit } from '@assets';
+import { Checkmark, Close, Edit, Star } from '@assets';
 import {
   CharacterField,
   CharacterImageField,
@@ -9,7 +9,9 @@ import {
   CharacterStatusField,
   IconButton
 } from '@components';
-import { ROUTES } from '@constants';
+import { NOTIFICATION_TYPE, ROUTES } from '@constants';
+import { notify } from '@helpers';
+import { useCharactersStore } from '@stores';
 import { type Status, type TCharacter } from '@types';
 
 import styles from './CharacterCard.module.scss';
@@ -17,9 +19,11 @@ import styles from './CharacterCard.module.scss';
 import type { TCharacterCardProps } from './types';
 
 export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'notifications']);
+  const { favourites, setFavourites } = useCharactersStore();
   const [isEditing, setIsEditing] = useState(false);
   const [editedCharacter, setEditedCharacter] = useState<TCharacter>(character);
+  const isFavourite = favourites.some((item) => item.id === editedCharacter.id);
 
   useEffect(() => {
     if (!isEditing) {
@@ -51,6 +55,23 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
   const handleConfirmEdit = () => {
     onSave(editedCharacter);
     setIsEditing(false);
+  };
+
+  const handleFavourite = () => {
+    if (!isFavourite) {
+      setFavourites([
+        ...favourites,
+        { id: editedCharacter.id, name: editedCharacter.name }
+      ]);
+
+      return notify(
+        t('notifications:addedToFavourites'),
+        NOTIFICATION_TYPE.success
+      );
+    }
+
+    setFavourites(favourites.filter((item) => item.id !== editedCharacter.id));
+    notify(t('notifications:removedFromFavourites'), NOTIFICATION_TYPE.success);
   };
 
   return (
@@ -115,6 +136,18 @@ export const CharacterCard = ({ character, onSave }: TCharacterCardProps) => {
           <Edit />
         </IconButton>
       )}
+
+      <IconButton
+        className={styles.favourite__button}
+        onClick={handleFavourite}
+        variant='plain'
+      >
+        <Star
+          color={isFavourite ? 'var(--color-accent)' : 'transparent'}
+          stroke={isFavourite ? 'transparent' : 'var(--color-accent)'}
+          strokeWidth={isFavourite ? 0 : '1px'}
+        />
+      </IconButton>
     </div>
   );
 };

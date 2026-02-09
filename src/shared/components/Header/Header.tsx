@@ -1,9 +1,11 @@
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 
 import { HeaderLogo, Moon, Sun } from '@assets';
-import { ColorScheme, ThemeLanguage } from '@constants';
+import { ColorScheme, ROUTES, ThemeLanguage } from '@constants';
 import { useTheme } from '@hooks';
+import { FavouritesDropdown } from '@widgets';
 
 import { IconButton } from '../IconButton/IconButton';
 
@@ -12,6 +14,9 @@ import styles from './Header.module.scss';
 export const AppHeader = () => {
   const { t, i18n } = useTranslation(['common']);
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+
+  const isHomePath = location.pathname === ROUTES.MAIN;
 
   const changeLanguage = () => {
     i18next.changeLanguage(
@@ -38,6 +43,8 @@ export const AppHeader = () => {
       <div className={styles.header__inner}>
         <HeaderLogo color={logoColor} />
         <div className={styles.header__btns}>
+          {isHomePath && <FavouritesDropdown />}
+
           <IconButton
             onClick={toggleTheme}
             size='big'
